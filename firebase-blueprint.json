@@ -1,0 +1,160 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The user's unique Firebase UID" },
+        "name": { "type": "string", "description": "Display name of the user" },
+        "email": { "type": "string", "description": "Email address of the user" },
+        "country": { "type": "string", "description": "User country" },
+        "membership": { "type": "string", "description": "Premium, Pro, or Free tier", "enum": ["Free", "Pro", "Premium"] },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user registered" }
+      },
+      "required": ["uid", "email", "name"]
+    },
+    "Watchlist": {
+      "title": "Watchlist",
+      "description": "Watchlisted items for a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique watchlist item ID" },
+        "userId": { "type": "string", "description": "The user UID" },
+        "symbol": { "type": "string", "description": "Stock ticker, crypto symbol or ETF symbol" },
+        "name": { "type": "string", "description": "Asset name" },
+        "type": { "type": "string", "description": "stock, crypto, or etf", "enum": ["stock", "crypto", "etf"] },
+        "addedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "symbol", "name", "type"]
+    },
+    "SavedArticle": {
+      "title": "SavedArticle",
+      "description": "Financial news articles bookmarked by the user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique saved article ID" },
+        "userId": { "type": "string", "description": "User UID" },
+        "newsId": { "type": "string", "description": "Article unique ID or URL hash" },
+        "title": { "type": "string", "description": "Article title" },
+        "summary": { "type": "string", "description": "Brief summary or content" },
+        "source": { "type": "string", "description": "Publisher source" },
+        "url": { "type": "string", "description": "Original article URL" },
+        "image": { "type": "string", "description": "Article thumbnail image URL" },
+        "category": { "type": "string", "description": "Finance, technology, general, etc." },
+        "datetime": { "type": "integer", "description": "Publish timestamp" },
+        "savedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "newsId", "title", "url", "savedAt"]
+    },
+    "Alert": {
+      "title": "Alert",
+      "description": "Price or breaking news alerts set by the user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique alert ID" },
+        "userId": { "type": "string", "description": "User UID" },
+        "symbol": { "type": "string", "description": "Ticker symbol" },
+        "name": { "type": "string", "description": "Asset name" },
+        "targetPrice": { "type": "number", "description": "Trigger price target" },
+        "condition": { "type": "string", "description": "above or below trigger", "enum": ["above", "below"] },
+        "type": { "type": "string", "description": "price or news", "enum": ["price", "news"] },
+        "isActive": { "type": "boolean", "description": "Whether alert is active" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "symbol", "targetPrice", "condition", "type", "isActive", "createdAt"]
+    },
+    "RecentSearch": {
+      "title": "RecentSearch",
+      "description": "A user's recent ticker search query",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique ID" },
+        "userId": { "type": "string", "description": "User UID" },
+        "query": { "type": "string", "description": "Ticker, crypto name, or company name searched" },
+        "type": { "type": "string", "description": "Search category type" },
+        "searchedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "query", "searchedAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User dynamic notifications (timeline alerts, updates)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique notification ID" },
+        "userId": { "type": "string", "description": "User UID" },
+        "title": { "type": "string", "description": "Alert title" },
+        "message": { "type": "string", "description": "Alert descriptive message" },
+        "category": { "type": "string", "description": "Today, Yesterday, Earlier", "enum": ["Today", "Yesterday", "Earlier"] },
+        "type": { "type": "string", "description": "system, price_alert, breaking_news" },
+        "isRead": { "type": "boolean", "description": "Is read status" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "title", "message", "category", "timestamp", "isRead"]
+    },
+    "ChatHistory": {
+      "title": "ChatHistory",
+      "description": "A record of the user conversation history with the AI Assistant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Message ID" },
+        "userId": { "type": "string", "description": "User UID" },
+        "sender": { "type": "string", "description": "user or ai", "enum": ["user", "ai"] },
+        "message": { "type": "string", "description": "Text message content" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "sender", "message", "timestamp"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "User settings configuration document",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User UID" },
+        "theme": { "type": "string", "description": "Dark Green, Light, Midnight", "enum": ["dark-green", "light", "midnight"] },
+        "language": { "type": "string", "description": "Active language default" },
+        "currency": { "type": "string", "description": "USD, EUR, INR, GBP" },
+        "country": { "type": "string", "description": "User home country" },
+        "pushNotifications": { "type": "boolean", "description": "Allow push alerts" },
+        "emailNotifications": { "type": "boolean", "description": "Allow email digests" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "theme", "pushNotifications", "emailNotifications"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of user profiles"
+    },
+    "/watchlists/{watchlistId}": {
+      "schema": "Watchlist",
+      "description": "Stocks, crypto and ETFs watched by users"
+    },
+    "/savedArticles/{savedArticleId}": {
+      "schema": "SavedArticle",
+      "description": "Bookmarked news articles"
+    },
+    "/alerts/{alertId}": {
+      "schema": "Alert",
+      "description": "User price target triggers and alert events"
+    },
+    "/recentSearches/{recentSearchId}": {
+      "schema": "RecentSearch",
+      "description": "User-specific search history"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "System-generated alerts and timeline feed notifications"
+    },
+    "/chatHistory/{chatId}": {
+      "schema": "ChatHistory",
+      "description": "Message log for the AI advisor chat conversations"
+    },
+    "/settings/{userId}": {
+      "schema": "Settings",
+      "description": "Customized user dashboard settings"
+    }
+  }
+}
