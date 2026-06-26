@@ -10,6 +10,7 @@ export interface UserProfile {
   country: string;
   membership: "Free" | "Pro" | "Premium";
   createdAt: string;
+  photoURL?: string;
 }
 
 export interface UserSettings {

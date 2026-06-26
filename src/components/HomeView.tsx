@@ -93,9 +93,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="flex items-center gap-3.5">
           <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#163A2D] to-[#B6FF5A] p-[2px] shadow-md shrink-0">
             <div className="w-full h-full rounded-full bg-[#071C16] flex items-center justify-center overflow-hidden">
-              <span className="text-xs font-bold text-[#B6FF5A] font-mono">
-                {user?.name ? user.name.slice(0, 2).toUpperCase() : "IP"}
-              </span>
+              {user?.photoURL ? (
+                <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              ) : (
+                <span className="text-xs font-bold text-[#B6FF5A] font-mono">
+                  {user?.name ? user.name.slice(0, 2).toUpperCase() : "IP"}
+                </span>
+              )}
             </div>
           </div>
           <div>

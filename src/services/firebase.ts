@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZREClRI-Az-m4pKDgaeWr8pcX2rcUUnU",
@@ -15,7 +15,22 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+
+// Initialize analytics safely
+let analytics: any = null;
+if (typeof window !== "undefined") {
+  isSupported().then((supported) => {
+    if (supported) {
+      try {
+        analytics = getAnalytics(app);
+      } catch (err) {
+        console.warn("Firebase Analytics could not be initialized:", err);
+      }
+    }
+  }).catch((err) => {
+    console.warn("Firebase Analytics isSupported check failed:", err);
+  });
+}
 
 // Export initialized services
 export const auth = getAuth(app);

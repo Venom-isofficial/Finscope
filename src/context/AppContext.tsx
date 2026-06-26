@@ -153,15 +153,43 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         // Load or create User Profile in Firestore
         const userDocRef = doc(db, "users", firebaseUser.uid);
         let profile: UserProfile | null = null;
+
+        // Resolve name and profile pic according to Google / Apple preference
+        let resolvedName = firebaseUser.displayName || firebaseUser.email?.split("@")[0] || "Investor";
+        let resolvedPhotoURL = firebaseUser.photoURL || "";
+
+        const googleProvider = firebaseUser.providerData?.find(p => p.providerId === "google.com");
+        const appleProvider = firebaseUser.providerData?.find(p => p.providerId === "apple.com");
+
+        if (googleProvider) {
+          if (googleProvider.displayName) resolvedName = googleProvider.displayName;
+          if (googleProvider.photoURL) resolvedPhotoURL = googleProvider.photoURL;
+        } else if (appleProvider) {
+          if (appleProvider.displayName) resolvedName = appleProvider.displayName;
+          if (appleProvider.photoURL) resolvedPhotoURL = appleProvider.photoURL;
+        }
+
         try {
           const userDocSnap = await getDoc(userDocRef);
           if (userDocSnap.exists()) {
-            profile = userDocSnap.data() as UserProfile;
+            const existingData = userDocSnap.data();
+            profile = {
+              uid: firebaseUser.uid,
+              name: resolvedName,
+              photoURL: resolvedPhotoURL,
+              email: firebaseUser.email || existingData.email || "",
+              country: existingData.country || "United States",
+              membership: existingData.membership || "Premium",
+              createdAt: existingData.createdAt || new Date().toISOString()
+            };
+            // Sync resolved profile back to Firestore
+            await setDoc(userDocRef, profile, { merge: true });
           } else {
             // Create profile
             profile = {
               uid: firebaseUser.uid,
-              name: firebaseUser.displayName || firebaseUser.email?.split("@")[0] || "Investor",
+              name: resolvedName,
+              photoURL: resolvedPhotoURL,
               email: firebaseUser.email || "",
               country: "United States",
               membership: "Premium",
@@ -177,11 +205,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           const localUserStr = localStorage.getItem("finscope_user");
           const localProfile = localUserStr ? JSON.parse(localUserStr) : null;
           if (localProfile && localProfile.uid === firebaseUser.uid) {
-            setUser(localProfile);
+            const updatedProfile = {
+              ...localProfile,
+              name: resolvedName,
+              photoURL: resolvedPhotoURL
+            };
+            setUser(updatedProfile);
+            localStorage.setItem("finscope_user", JSON.stringify(updatedProfile));
           } else {
             const fallbackProfile: UserProfile = {
               uid: firebaseUser.uid,
-              name: firebaseUser.displayName || firebaseUser.email?.split("@")[0] || "Investor",
+              name: resolvedName,
+              photoURL: resolvedPhotoURL,
               email: firebaseUser.email || "",
               country: "United States",
               membership: "Premium",

@@ -36,8 +36,12 @@ export const ProfileView: React.FC = () => {
         {/* Decorative backdrop */}
         <div className="absolute top-0 right-0 w-24 h-24 bg-[#B6FF5A]/10 rounded-full blur-xl pointer-events-none" />
 
-        <div className="w-14 h-14 rounded-full bg-[#163A2D] border border-[#B6FF5A]/30 flex items-center justify-center text-[#B6FF5A] font-black text-lg font-display shadow-md">
-          {user?.name ? user.name.charAt(0).toUpperCase() : "I"}
+        <div className="w-14 h-14 rounded-full bg-[#163A2D] border border-[#B6FF5A]/30 flex items-center justify-center text-[#B6FF5A] font-black text-lg font-display shadow-md overflow-hidden">
+          {user?.photoURL ? (
+            <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+          ) : (
+            user?.name ? user.name.charAt(0).toUpperCase() : "I"
+          )}
         </div>
         
         <div>
