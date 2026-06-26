@@ -20,7 +20,7 @@ import { NotificationsView } from "./components/NotificationsView";
 import { FinScopeAPI } from "./services/api";
 import { NewsItem } from "./types";
 import { motion, AnimatePresence } from "motion/react";
-import { Star, X, Bell, Sparkles, MapPin, Building, Globe, Landmark, ShieldCheck, TrendingUp, AlertCircle, Bookmark, CheckCircle, ExternalLink } from "lucide-react";
+import { Star, X, Bell, Sparkles, MapPin, Building, Globe, Landmark, ShieldCheck, TrendingUp, AlertCircle, Bookmark, CheckCircle, ExternalLink, Home, BarChart2, Newspaper, Cpu, User, Compass } from "lucide-react";
 
 const MainAppContent: React.FC = () => {
   const { user, watchlist, addToWatchlist, removeFromWatchlist, savedArticles, saveArticle, unsaveArticle, alerts, addPriceAlert, deleteAlert } = useApp();
@@ -192,41 +192,123 @@ const MainAppContent: React.FC = () => {
             key="dashboard"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-full min-h-screen"
+            className="w-full min-h-screen flex flex-col md:flex-row bg-[#071C16]"
           >
-            {/* Navigated Subview wrapper */}
-            <div className="max-w-2xl mx-auto w-full relative">
-              {isNotificationsOpen ? (
-                <NotificationsView onBack={() => setIsNotificationsOpen(false)} />
-              ) : (
-                <>
-                  {activeTab === "home" && (
-                    <HomeView
-                      onSearchOpen={() => setIsSearchOpen(true)}
-                      onSelectAsset={(sym, ty) => setSelectedAsset({ symbol: sym, type: ty })}
-                      onNavigateTab={(tab) => setActiveTab(tab)}
-                      onShowNewsDetails={(art) => setSelectedNews(art)}
-                      onNotificationsOpen={() => setIsNotificationsOpen(true)}
-                    />
-                  )}
+            {/* Desktop Left Sidebar Navigation - Hidden on mobile */}
+            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-[#051410] border-r border-white/5 p-6 h-screen sticky top-0 justify-between">
+              <div className="flex flex-col">
+                {/* Logo or Brand */}
+                <div className="flex items-center gap-3 mb-8 px-2">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#163A2D] to-[#B6FF5A] p-[2px] shadow-md flex items-center justify-center shrink-0">
+                    <div className="w-full h-full rounded-lg bg-[#071C16] flex items-center justify-center font-bold text-[#B6FF5A] font-display">
+                      FS
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-white font-display font-black text-sm uppercase tracking-wider leading-none">FinScope</h2>
+                    <span className="text-[8px] font-mono tracking-widest text-[#A6B0AA]/70 block mt-1 uppercase font-black">AI Portfolio Intel</span>
+                  </div>
+                </div>
 
-                  {activeTab === "markets" && (
-                    <MarketsView
-                      onSelectAsset={(sym, ty) => setSelectedAsset({ symbol: sym, type: ty })}
-                    />
-                  )}
+                {/* User Profile Info on sidebar */}
+                {user && (
+                  <div className="p-4 rounded-2xl bg-[#163A2D]/40 border border-white/5 mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full border border-[#B6FF5A]/20 flex items-center justify-center text-[#B6FF5A] font-black font-display bg-[#163A2D] shadow-md overflow-hidden shrink-0">
+                        {user.photoURL ? (
+                          <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                        ) : (
+                          <span className="text-xs font-bold text-[#B6FF5A] font-mono">
+                            {user.name ? user.name.slice(0, 2).toUpperCase() : "IP"}
+                          </span>
+                        )}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-black text-white truncate">{user.name || "Investor"}</p>
+                        <p className="text-[9px] text-[#A6B0AA] truncate font-medium">{user.email || "guest@finscope.ai"}</p>
+                        <span className="text-[8px] font-mono font-black tracking-widest bg-[#B6FF5A]/15 border border-[#B6FF5A]/25 text-[#B6FF5A] px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
+                          {user.membership || "Pro"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-                  {activeTab === "news" && (
-                    <NewsView
-                      onShowNewsDetails={(art) => setSelectedNews(art)}
-                    />
-                  )}
+                {/* Nav Links */}
+                <nav className="space-y-1">
+                  {[
+                    { id: "home", label: "Home Dashboard", icon: Home },
+                    { id: "markets", label: "Markets Hub", icon: Compass },
+                    { id: "news", label: "News & Briefings", icon: Newspaper },
+                    { id: "ai", label: "AI Advisor", icon: Cpu },
+                    { id: "profile", label: "Profile & Settings", icon: User }
+                  ].map((tab) => {
+                    const Icon = tab.icon;
+                    const isActive = activeTab === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => {
+                          setActiveTab(tab.id);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold tracking-wide transition-all ${
+                          isActive
+                            ? "bg-[#163A2D] text-[#B6FF5A] border-l-2 border-[#B6FF5A] shadow-md"
+                            : "text-[#A6B0AA] hover:text-white hover:bg-white/[0.02]"
+                        }`}
+                      >
+                        <Icon className={`w-4 h-4 ${isActive ? "text-[#B6FF5A]" : "text-[#A6B0AA]"}`} />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
 
-                  {activeTab === "ai" && <AIChatView />}
+              {/* Sidebar bottom indicator */}
+              <div className="text-[9px] text-[#A6B0AA]/40 font-mono tracking-wider pt-4 border-t border-white/5">
+                <p>FinScope AI v1.0.0</p>
+                <p className="mt-1">© 2026 FinScope.ai</p>
+              </div>
+            </div>
 
-                  {activeTab === "profile" && <ProfileView />}
-                </>
-              )}
+            {/* Main content view */}
+            <div className="flex-1 min-w-0 md:h-screen md:overflow-y-auto">
+              {/* Navigated Subview wrapper */}
+              <div className="max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto w-full relative">
+                {isNotificationsOpen ? (
+                  <NotificationsView onBack={() => setIsNotificationsOpen(false)} />
+                ) : (
+                  <>
+                    {activeTab === "home" && (
+                      <HomeView
+                        onSearchOpen={() => setIsSearchOpen(true)}
+                        onSelectAsset={(sym, ty) => setSelectedAsset({ symbol: sym, type: ty })}
+                        onNavigateTab={(tab) => setActiveTab(tab)}
+                        onShowNewsDetails={(art) => setSelectedNews(art)}
+                        onNotificationsOpen={() => setIsNotificationsOpen(true)}
+                      />
+                    )}
+
+                    {activeTab === "markets" && (
+                      <MarketsView
+                        onSelectAsset={(sym, ty) => setSelectedAsset({ symbol: sym, type: ty })}
+                      />
+                    )}
+
+                    {activeTab === "news" && (
+                      <NewsView
+                        onShowNewsDetails={(art) => setSelectedNews(art)}
+                      />
+                    )}
+
+                    {activeTab === "ai" && <AIChatView />}
+
+                    {activeTab === "profile" && <ProfileView />}
+                  </>
+                )}
+              </div>
             </div>
 
             {/* Bottom Navigator */}
