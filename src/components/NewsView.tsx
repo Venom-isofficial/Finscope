@@ -64,28 +64,28 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
       {/* Title Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <span className="text-[10px] font-mono tracking-widest text-[#A6B0AA] uppercase font-semibold block mb-0.5">FINANCIAL JOURNALISM</span>
-          <h1 className="font-display text-2xl font-black text-white tracking-tight">FinScope Editorial</h1>
+          <span className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase font-semibold block mb-0.5">FINANCIAL JOURNALISM</span>
+          <h1 className="font-display text-2xl font-black text-[var(--text-primary)] tracking-tight">FinScope Editorial</h1>
         </div>
-        <button onClick={loadNews} className="p-3.5 rounded-[18px] bg-[#163A2D] border border-white/10 text-[#A6B0AA] hover:text-white hover:border-[#B6FF5A]/50 transition-all shadow-lg">
+        <button onClick={loadNews} className="p-3.5 rounded-[18px] bg-[var(--bg-card)] border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/50 transition-all shadow-lg cursor-pointer">
           <RefreshCw className="w-4 h-4" />
         </button>
       </div>
 
       {/* Primary Toggles */}
-      <div className="grid grid-cols-2 gap-2 bg-[#163A2D] rounded-[18px] p-1.5 border border-white/10 mb-8 shadow-md">
+      <div className="grid grid-cols-2 gap-2 bg-[var(--bg-card)] rounded-[18px] p-1.5 border border-white/5 mb-8 shadow-md">
         <button
           onClick={() => setActiveTab("latest")}
-          className={`py-3 rounded-[14px] text-xs font-black tracking-widest uppercase transition-all ${
-            activeTab === "latest" ? "bg-[#B6FF5A] text-[#071C16] shadow-lg shadow-[#B6FF5A]/10" : "text-[#A6B0AA] hover:text-white"
+          className={`py-3 rounded-[14px] text-xs font-black tracking-widest uppercase transition-all cursor-pointer ${
+            activeTab === "latest" ? "bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg shadow-[var(--accent)]/10" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           }`}
         >
           LATEST NEWS
         </button>
         <button
           onClick={() => setActiveTab("bookmarks")}
-          className={`py-3 rounded-[14px] text-xs font-black tracking-widest uppercase transition-all flex items-center justify-center gap-2 ${
-            activeTab === "bookmarks" ? "bg-[#B6FF5A] text-[#071C16] shadow-lg shadow-[#B6FF5A]/10" : "text-[#A6B0AA] hover:text-white"
+          className={`py-3 rounded-[14px] text-xs font-black tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer ${
+            activeTab === "bookmarks" ? "bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg shadow-[var(--accent)]/10" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           }`}
         >
           <Bookmark className="w-3.5 h-3.5" />
@@ -104,13 +104,13 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
           >
             {/* Search within News */}
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A6B0AA]" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-secondary)]" />
               <input
                 type="text"
                 placeholder="Search headlines or summaries..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3.5 rounded-[18px] bg-[#163A2D]/80 border border-white/10 focus:border-[#B6FF5A]/50 focus:bg-[#163A2D] outline-none text-white text-xs transition-all shadow-md placeholder-[#A6B0AA]/60"
+                className="w-full pl-11 pr-4 py-3.5 rounded-[18px] bg-[var(--bg-card)]/80 border border-white/5 focus:border-[var(--accent)]/50 focus:bg-[var(--bg-card)] outline-none text-[var(--text-primary)] text-xs transition-all shadow-md placeholder-[var(--text-secondary)]/60"
               />
             </div>
 
@@ -120,10 +120,10 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase whitespace-nowrap transition-all ${
+                  className={`px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase whitespace-nowrap transition-all cursor-pointer ${
                     selectedCategory === cat
-                      ? "bg-[#B6FF5A] text-[#071C16] shadow-md shadow-[#B6FF5A]/10"
-                      : "bg-[#163A2D]/70 text-[#A6B0AA] border border-white/10 hover:text-white hover:border-[#B6FF5A]/30"
+                      ? "bg-[var(--accent)] text-[var(--bg-primary)] shadow-md shadow-[var(--accent)]/10"
+                      : "bg-[var(--bg-card)]/75 text-[var(--text-secondary)] border border-white/5 hover:text-[var(--text-primary)] hover:border-[var(--accent)]/30"
                   }`}
                 >
                   {cat}

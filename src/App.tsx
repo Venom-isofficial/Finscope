@@ -153,7 +153,15 @@ const MainAppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#071C16] text-white overflow-x-hidden relative selection:bg-[#B6FF5A] selection:text-[#071C16]">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden relative selection:bg-[var(--accent)] selection:text-[var(--bg-primary)] transition-colors duration-500">
+      {/* Global Animated Watery Background Layer */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[55%] h-[55%] rounded-full bg-[var(--accent)] opacity-[0.06] blur-[120px] watery-blob-1" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[65%] h-[65%] rounded-full bg-[var(--accent)] opacity-[0.05] blur-[140px] watery-blob-2" />
+        <div className="absolute top-[30%] right-[15%] w-[45%] h-[45%] rounded-full bg-[var(--bg-card)] opacity-[0.14] blur-[100px] watery-blob-3" />
+        <div className="absolute bottom-[20%] left-[10%] w-[50%] h-[50%] rounded-full bg-[var(--bg-secondary)] opacity-[0.12] blur-[110px] watery-blob-4" />
+      </div>
+
       <AnimatePresence mode="wait">
         {/* FLOW 1: SPLASH */}
         {flow === "splash" && (
@@ -192,41 +200,41 @@ const MainAppContent: React.FC = () => {
             key="dashboard"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-full min-h-screen flex flex-col md:flex-row bg-[#071C16]"
+            className="w-full min-h-screen flex flex-col md:flex-row bg-transparent relative z-10"
           >
             {/* Desktop Left Sidebar Navigation - Hidden on mobile */}
-            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-[#051410] border-r border-white/5 p-6 h-screen sticky top-0 justify-between">
+            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-[var(--bg-secondary)]/30 backdrop-blur-xl border-r border-white/5 p-6 h-screen sticky top-0 justify-between">
               <div className="flex flex-col">
                 {/* Logo or Brand */}
                 <div className="flex items-center gap-3 mb-8 px-2">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#163A2D] to-[#B6FF5A] p-[2px] shadow-md flex items-center justify-center shrink-0">
-                    <div className="w-full h-full rounded-lg bg-[#071C16] flex items-center justify-center font-bold text-[#B6FF5A] font-display">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[var(--bg-card)] to-[var(--accent)] p-[2px] shadow-md flex items-center justify-center shrink-0">
+                    <div className="w-full h-full rounded-lg bg-[var(--bg-primary)] flex items-center justify-center font-bold text-[var(--accent)] font-display">
                       FS
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-white font-display font-black text-sm uppercase tracking-wider leading-none">FinScope</h2>
-                    <span className="text-[8px] font-mono tracking-widest text-[#A6B0AA]/70 block mt-1 uppercase font-black">AI Portfolio Intel</span>
+                    <h2 className="text-[var(--text-primary)] font-display font-black text-sm uppercase tracking-wider leading-none">FinScope</h2>
+                    <span className="text-[8px] font-mono tracking-widest text-[var(--text-secondary)]/70 block mt-1 uppercase font-black">AI Portfolio Intel</span>
                   </div>
                 </div>
 
                 {/* User Profile Info on sidebar */}
                 {user && (
-                  <div className="p-4 rounded-2xl bg-[#163A2D]/40 border border-white/5 mb-6">
+                  <div className="p-4 rounded-2xl bg-[var(--bg-card)]/40 border border-white/5 mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full border border-[#B6FF5A]/20 flex items-center justify-center text-[#B6FF5A] font-black font-display bg-[#163A2D] shadow-md overflow-hidden shrink-0">
+                      <div className="w-10 h-10 rounded-full border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)] font-black font-display bg-[var(--bg-card)] shadow-md overflow-hidden shrink-0">
                         {user.photoURL ? (
                           <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                         ) : (
-                          <span className="text-xs font-bold text-[#B6FF5A] font-mono">
+                          <span className="text-xs font-bold text-[var(--accent)] font-mono">
                             {user.name ? user.name.slice(0, 2).toUpperCase() : "IP"}
                           </span>
                         )}
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs font-black text-white truncate">{user.name || "Investor"}</p>
-                        <p className="text-[9px] text-[#A6B0AA] truncate font-medium">{user.email || "guest@finscope.ai"}</p>
-                        <span className="text-[8px] font-mono font-black tracking-widest bg-[#B6FF5A]/15 border border-[#B6FF5A]/25 text-[#B6FF5A] px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
+                        <p className="text-xs font-black text-[var(--text-primary)] truncate">{user.name || "Investor"}</p>
+                        <p className="text-[9px] text-[var(--text-secondary)] truncate font-medium">{user.email || "guest@finscope.ai"}</p>
+                        <span className="text-[8px] font-mono font-black tracking-widest bg-[var(--accent)]/15 border border-[var(--accent)]/25 text-[var(--accent)] px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
                           {user.membership || "Pro"}
                         </span>
                       </div>
@@ -254,11 +262,11 @@ const MainAppContent: React.FC = () => {
                         }}
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold tracking-wide transition-all ${
                           isActive
-                            ? "bg-[#163A2D] text-[#B6FF5A] border-l-2 border-[#B6FF5A] shadow-md"
-                            : "text-[#A6B0AA] hover:text-white hover:bg-white/[0.02]"
+                            ? "bg-[var(--bg-card)] text-[var(--accent)] border-l-2 border-[var(--accent)] shadow-md"
+                            : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]/20"
                         }`}
                       >
-                        <Icon className={`w-4 h-4 ${isActive ? "text-[#B6FF5A]" : "text-[#A6B0AA]"}`} />
+                        <Icon className={`w-4 h-4 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-secondary)]"}`} />
                         {tab.label}
                       </button>
                     );
@@ -267,7 +275,7 @@ const MainAppContent: React.FC = () => {
               </div>
 
               {/* Sidebar bottom indicator */}
-              <div className="text-[9px] text-[#A6B0AA]/40 font-mono tracking-wider pt-4 border-t border-white/5">
+              <div className="text-[9px] text-[var(--text-secondary)]/40 font-mono tracking-wider pt-4 border-t border-white/5">
                 <p>FinScope AI v1.0.0</p>
                 <p className="mt-1">© 2026 FinScope.ai</p>
               </div>
