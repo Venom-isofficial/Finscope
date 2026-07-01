@@ -27,6 +27,7 @@ var import_path = __toESM(require("path"), 1);
 var import_vite = require("vite");
 var import_genai = require("@google/genai");
 var import_dotenv = __toESM(require("dotenv"), 1);
+var import_fs = __toESM(require("fs"), 1);
 import_dotenv.default.config();
 var app = (0, import_express.default)();
 var PORT = 3e3;
@@ -272,9 +273,20 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await (0, import_vite.createServer)({
       server: { middlewareMode: true },
-      appType: "spa"
+      appType: "custom"
     });
     app.use(vite.middlewares);
+    app.get("*", async (req, res, next) => {
+      const url = req.originalUrl;
+      try {
+        let template = import_fs.default.readFileSync(import_path.default.resolve(process.cwd(), "index.html"), "utf-8");
+        template = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(template);
+      } catch (e) {
+        vite.ssrFixStacktrace(e);
+        next(e);
+      }
+    });
   } else {
     const distPath = import_path.default.join(process.cwd(), "dist");
     app.use(import_express.default.static(distPath));
