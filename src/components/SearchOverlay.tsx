@@ -64,24 +64,24 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 bg-[#071C16]/95 backdrop-blur-md flex flex-col p-6"
+      className="fixed inset-0 z-50 bg-[var(--bg-primary)]/95 backdrop-blur-md flex flex-col p-6"
     >
       {/* Top Search bar input */}
       <div className="flex items-center gap-4 max-w-2xl mx-auto w-full mb-6">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A6B0AA]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-secondary)]" />
           <input
             type="text"
             placeholder="Search stocks, crypto, ETFs..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full pl-12 pr-12 py-4 rounded-2xl bg-[#163A2D] border border-white/5 focus:border-[#B6FF5A]/30 outline-none text-white text-sm"
+            className="w-full pl-12 pr-12 py-4 rounded-2xl bg-[var(--bg-card)] border border-white/5 focus:border-[var(--accent)]/30 outline-none text-[var(--text-primary)] text-sm"
             autoFocus
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-[#A6B0AA] hover:text-white"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             >
               <X className="w-4 h-4" />
             </button>
@@ -89,7 +89,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
         </div>
         <button
           onClick={onClose}
-          className="p-3.5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 text-[#A6B0AA] hover:text-white transition-all text-xs font-bold"
+          className="p-3.5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all text-xs font-bold cursor-pointer"
         >
           CLOSE
         </button>
@@ -101,10 +101,10 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase transition-all cursor-pointer ${
               category === cat
-                ? "bg-[#A6FF4D] text-[#071C16]"
-                : "bg-[#163A2D]/50 text-[#A6B0AA] border border-white/5 hover:text-white"
+                ? "bg-[var(--accent)] text-[var(--bg-primary)]"
+                : "bg-[var(--bg-card)]/50 text-[var(--text-secondary)] border border-white/5 hover:text-[var(--text-primary)]"
             }`}
           >
             {cat === "all" ? "ALL ASSETS" : cat + "S"}
@@ -120,13 +120,13 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
             {recentSearches.length > 0 && (
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-xs uppercase font-mono tracking-widest text-[#A6B0AA] flex items-center gap-2">
+                  <h3 className="text-xs uppercase font-mono tracking-widest text-[var(--text-secondary)] flex items-center gap-2">
                     <History className="w-3.5 h-3.5" />
                     RECENT SEARCHES
                   </h3>
                   <button
                     onClick={clearSearchHistory}
-                    className="text-[10px] text-[#A6B0AA] hover:text-[#FF5D5D] hover:underline"
+                    className="text-[10px] text-[var(--text-secondary)] hover:text-red-400 hover:underline cursor-pointer"
                   >
                     Clear All
                   </button>
@@ -136,10 +136,10 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
                     <button
                       key={search.id}
                       onClick={() => handleSelect(search.query, search.type as any)}
-                      className="flex items-center gap-2.5 p-3 rounded-xl bg-[#163A2D]/40 border border-white/5 text-left hover:border-[#B6FF5A]/20 transition-all"
+                      className="flex items-center gap-2.5 p-3 rounded-xl bg-[var(--bg-card)]/40 border border-white/5 text-left hover:border-[var(--accent)]/20 transition-all cursor-pointer"
                     >
-                      <span className="text-xs font-bold text-white font-mono">{search.query}</span>
-                      <span className="text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-white/5 text-[#A6B0AA] ml-auto font-mono">
+                      <span className="text-xs font-bold text-[var(--text-primary)] font-mono">{search.query}</span>
+                      <span className="text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-white/5 text-[var(--text-secondary)] ml-auto font-mono">
                         {search.type}
                       </span>
                     </button>
@@ -150,8 +150,8 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
 
             {/* Trending Searches */}
             <div>
-              <h3 className="text-xs uppercase font-mono tracking-widest text-[#A6B0AA] mb-3 flex items-center gap-2">
-                <TrendingUp className="w-3.5 h-3.5 text-[#B6FF5A]" />
+              <h3 className="text-xs uppercase font-mono tracking-widest text-[var(--text-secondary)] mb-3 flex items-center gap-2">
+                <TrendingUp className="w-3.5 h-3.5 text-[var(--accent)]" />
                 TRENDING NOW
               </h3>
               <div className="space-y-2">
@@ -159,13 +159,13 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
                   <button
                     key={trend.symbol}
                     onClick={() => handleSelect(trend.symbol, trend.type)}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl bg-[#163A2D]/30 border border-white/5 hover:bg-[#163A2D]/50 transition-all text-left"
+                    className="w-full flex items-center justify-between p-4 rounded-2xl bg-[var(--bg-card)]/30 border border-white/5 hover:bg-[var(--bg-card)]/50 transition-all text-left cursor-pointer"
                   >
                     <div>
-                      <p className="text-sm font-bold font-mono text-white">{trend.symbol}</p>
-                      <p className="text-xs text-[#A6B0AA]">{trend.name}</p>
+                      <p className="text-sm font-bold font-mono text-[var(--text-primary)]">{trend.symbol}</p>
+                      <p className="text-xs text-[var(--text-secondary)]">{trend.name}</p>
                     </div>
-                    <span className="text-[10px] uppercase font-mono tracking-widest px-2.5 py-1 rounded bg-[#B6FF5A]/10 text-[#B6FF5A]">
+                    <span className="text-[10px] uppercase font-mono tracking-widest px-2.5 py-1 rounded bg-[var(--accent)]/10 text-[var(--accent)]">
                       {trend.type}
                     </span>
                   </button>
@@ -176,7 +176,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
         ) : (
           /* Live Results list */
           <div>
-            <h3 className="text-xs uppercase font-mono tracking-widest text-[#A6B0AA] mb-3 flex items-center gap-2">
+            <h3 className="text-xs uppercase font-mono tracking-widest text-[var(--text-secondary)] mb-3 flex items-center gap-2">
               <Briefcase className="w-3.5 h-3.5" />
               MATCHING RESULTS ({filteredAssets.length})
             </h3>
@@ -186,25 +186,25 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose, o
                   <button
                     key={asset.symbol}
                     onClick={() => handleSelect(asset.symbol, asset.type)}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl bg-[#163A2D]/40 border border-white/5 hover:border-[#B6FF5A]/30 transition-all text-left"
+                    className="w-full flex items-center justify-between p-4 rounded-2xl bg-[var(--bg-card)]/40 border border-white/5 hover:border-[var(--accent)]/30 transition-all text-left cursor-pointer"
                   >
                     <div>
-                      <span className="text-xs font-bold font-mono bg-white/5 px-2 py-0.5 rounded text-[#B6FF5A] mr-2">
+                      <span className="text-xs font-bold font-mono bg-white/5 px-2 py-0.5 rounded text-[var(--accent)] mr-2">
                         {asset.symbol}
                       </span>
-                      <span className="text-sm text-white font-medium">{asset.name}</span>
+                      <span className="text-sm text-[var(--text-primary)] font-medium">{asset.name}</span>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-bold font-mono text-white">{asset.price}</p>
-                      <p className="text-[9px] uppercase tracking-widest font-mono text-[#A6B0AA]">{asset.type}</p>
+                      <p className="text-sm font-bold font-mono text-[var(--text-primary)]">{asset.price}</p>
+                      <p className="text-[9px] uppercase tracking-widest font-mono text-[var(--text-secondary)]">{asset.type}</p>
                     </div>
                   </button>
                 ))}
               </div>
             ) : (
               <div className="text-center py-12">
-                <p className="text-sm text-[#A6B0AA]">No assets found matching "{query}"</p>
-                <p className="text-xs text-[#A6B0AA]/60 mt-1">Check the spelling or try searching and typing another ticker.</p>
+                <p className="text-sm text-[var(--text-secondary)]">No assets found matching "{query}"</p>
+                <p className="text-xs text-[var(--text-secondary)]/60 mt-1">Check the spelling or try searching and typing another ticker.</p>
               </div>
             )}
           </div>
