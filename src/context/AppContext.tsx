@@ -435,15 +435,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     
     if (settings.theme === "dark-green") {
       root.classList.add("theme-dark-green");
-      root.style.setProperty("--bg-primary", "#071C16");
-      root.style.setProperty("--bg-secondary", "#0D2B22");
-      root.style.setProperty("--bg-card", "#163A2D");
+      root.style.setProperty("--bg-primary", "var(--bg-primary)");
+      root.style.setProperty("--bg-secondary", "var(--bg-secondary)");
+      root.style.setProperty("--bg-card", "var(--bg-card)");
       root.style.setProperty("--text-primary", "#FFFFFF");
-      root.style.setProperty("--text-secondary", "#A6B0AA");
-      root.style.setProperty("--accent", "#B6FF5A");
+      root.style.setProperty("--text-secondary", "var(--text-secondary)");
+      root.style.setProperty("--accent", "var(--accent)");
       root.style.setProperty("--accent-highlight", "#D8FF7E");
-      root.style.setProperty("--btn-accent", "#A6FF4D");
-      root.style.setProperty("--chart-green", "#92FF5A");
+      root.style.setProperty("--btn-accent", "var(--btn-accent)");
+      root.style.setProperty("--chart-green", "var(--chart-green)");
     } else if (settings.theme === "midnight") {
       root.classList.add("theme-midnight");
       root.style.setProperty("--bg-primary", "#090D16");

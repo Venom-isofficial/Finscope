@@ -5,7 +5,6 @@
 
 import React from "react";
 import { Home, BarChart2, Newspaper, Cpu, User } from "lucide-react";
-import { motion } from "motion/react";
 
 interface BottomNavProps {
   activeTab: string;
@@ -38,11 +37,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onChangeTab, un
             >
               {/* Active backing spotlight block */}
               {isActive && (
-                <motion.div
-                  layoutId="activeTabGlow"
-                  className="absolute inset-0 bg-white/[0.04] rounded-2xl border-t border-white/[0.04]"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
+                <div className="absolute inset-0 bg-white/[0.04] rounded-2xl border-t border-white/[0.04]" />
               )}
 
               {/* Floating notification indicator badge on News or Profile tabs */}
@@ -52,24 +47,20 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onChangeTab, un
 
               <Icon
                 className={`w-5 h-5 mb-1 transition-all duration-300 relative z-10 ${
-                  isActive ? "text-[#B6FF5A] scale-110" : "text-[#A6B0AA] hover:text-white"
+                  isActive ? "text-[var(--accent)] scale-110" : "text-[var(--text-secondary)] hover:text-white"
                 }`}
               />
               
               <span
                 className={`text-[9px] font-medium tracking-wide transition-colors duration-300 relative z-10 ${
-                  isActive ? "text-white" : "text-[#A6B0AA]"
+                  isActive ? "text-white" : "text-[var(--text-secondary)]"
                 }`}
               >
                 {tab.label}
               </span>
               
               {isActive && (
-                <motion.div
-                  layoutId="activeTabDot"
-                  className="absolute bottom-1 w-1 h-1 rounded-full bg-[#B6FF5A]"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
+                <div className="absolute bottom-1 w-1 h-1 rounded-full bg-[var(--accent)]" />
               )}
             </button>
           );

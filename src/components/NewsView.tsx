@@ -8,7 +8,6 @@ import { useApp } from "../context/AppContext";
 import { FinScopeAPI } from "../services/api";
 import { NewsItem } from "../types";
 import { Search, Bookmark, Sparkles, Share2, Eye, RefreshCw, Trash2 } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
 
 interface NewsViewProps {
   onShowNewsDetails: (article: NewsItem) => void;
@@ -93,14 +92,10 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
         </button>
       </div>
 
-      <AnimatePresence mode="wait">
+      
         {activeTab === "latest" ? (
-          <motion.div
-            key="latest"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="space-y-6"
+          <div
+            key="latest" className="space-y-6"
           >
             {/* Search within News */}
             <div className="relative">
@@ -138,18 +133,18 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
                 className="relative h-64 rounded-[24px] overflow-hidden border border-white/10 cursor-pointer shadow-2xl group"
               >
                 <img src={filteredNews[0].image} alt="Featured" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071C16] via-[#071C16]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/40 to-transparent" />
                 
                 <div className="absolute bottom-5 left-5 right-5">
-                  <span className="bg-[#B6FF5A] text-[#071C16] text-[9px] font-black tracking-widest uppercase px-2.5 py-1 rounded-[6px] mb-2.5 inline-block shadow-lg">
+                  <span className="bg-[var(--accent)] text-[var(--bg-primary)] text-[9px] font-black tracking-widest uppercase px-2.5 py-1 rounded-[6px] mb-2.5 inline-block shadow-lg">
                     {filteredNews[0].category}
                   </span>
-                  <h2 className="text-base font-black text-white line-clamp-2 leading-tight group-hover:text-[#B6FF5A] transition-colors">
+                  <h2 className="text-base font-black text-white line-clamp-2 leading-tight group-hover:text-[var(--accent)] transition-colors">
                     {filteredNews[0].headline}
                   </h2>
-                  <div className="flex justify-between items-center text-[10px] text-[#A6B0AA] mt-3.5 font-mono font-semibold">
+                  <div className="flex justify-between items-center text-[10px] text-[var(--text-secondary)] mt-3.5 font-mono font-semibold">
                     <span>{filteredNews[0].source}</span>
-                    <span className="flex items-center gap-1 text-[#B6FF5A] bg-[#B6FF5A]/10 px-2.5 py-1 rounded-[6px] border border-[#B6FF5A]/20">
+                    <span className="flex items-center gap-1 text-[var(--accent)] bg-[var(--accent)]/10 px-2.5 py-1 rounded-[6px] border border-[var(--accent)]/20">
                       <Eye className="w-3.5 h-3.5" />
                       View analysis
                     </span>
@@ -173,25 +168,25 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
                     <div
                       key={item.id}
                       onClick={() => onShowNewsDetails(item)}
-                      className="flex gap-4 p-4 rounded-[24px] bg-gradient-to-r from-[#163A2D]/80 to-[#0D2B22]/80 border border-white/10 hover:border-[#B6FF5A]/40 hover:shadow-2xl hover:translate-x-1 transition-all cursor-pointer shadow-lg"
+                      className="flex gap-4 p-4 rounded-[24px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 hover:shadow-2xl hover:translate-x-1 transition-all cursor-pointer shadow-lg"
                     >
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[9px] font-black font-mono text-[#B6FF5A] bg-[#B6FF5A]/10 px-2 py-0.5 rounded uppercase">{item.category}</span>
-                            <span className="text-[9px] font-mono text-[#A6B0AA] font-semibold">{item.source}</span>
+                            <span className="text-[9px] font-black font-mono text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded uppercase">{item.category}</span>
+                            <span className="text-[9px] font-mono text-[var(--text-secondary)] font-semibold">{item.source}</span>
                           </div>
-                          <h3 className="text-xs font-bold text-white leading-snug line-clamp-2 hover:text-[#B6FF5A] transition-colors">
+                          <h3 className="text-xs font-bold text-white leading-snug line-clamp-2 hover:text-[var(--accent)] transition-colors">
                             {item.headline}
                           </h3>
                         </div>
                         
                         <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-white/10">
-                          <span className="text-[9px] text-[#A6B0AA] font-mono font-semibold">{item.readTime || "3m read"}</span>
+                          <span className="text-[9px] text-[var(--text-secondary)] font-mono font-semibold">{item.readTime || "3m read"}</span>
                           <button
                             onClick={(e) => handleBookmarkToggle(e, item)}
                             className={`p-1.5 rounded-lg border transition-colors ${
-                              isSaved ? "text-[#B6FF5A] bg-[#B6FF5A]/15 border-[#B6FF5A]/30" : "text-[#A6B0AA] border-white/10 hover:bg-white/5"
+                              isSaved ? "text-[var(--accent)] bg-[var(--accent)]/15 border-[var(--accent)]/30" : "text-[var(--text-secondary)] border-white/10 hover:bg-white/5"
                             }`}
                           >
                             <Bookmark className="w-3.5 h-3.5 fill-current" />
@@ -206,20 +201,16 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
 
                 {filteredNews.length === 0 && (
                   <div className="text-center py-12">
-                    <p className="text-xs text-[#A6B0AA]">No news stories fit your specific filter parameters.</p>
+                    <p className="text-xs text-[var(--text-secondary)]">No news stories fit your specific filter parameters.</p>
                   </div>
                 )}
               </div>
             )}
-          </motion.div>
+          </div>
         ) : (
           /* BOOKMARKS VIEW */
-          <motion.div
-            key="bookmarks"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="space-y-4"
+          <div
+            key="bookmarks" className="space-y-4"
           >
             {savedArticles.length > 0 ? (
               savedArticles.map((article) => (
@@ -236,21 +227,21 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
                     datetime: article.datetime,
                     readTime: "3m read"
                   })}
-                  className="flex gap-4 p-4 rounded-[24px] bg-gradient-to-r from-[#163A2D]/80 to-[#0D2B22]/80 border border-white/10 hover:border-[#B6FF5A]/40 hover:shadow-2xl hover:translate-x-1 transition-all cursor-pointer shadow-lg"
+                  className="flex gap-4 p-4 rounded-[24px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 hover:shadow-2xl hover:translate-x-1 transition-all cursor-pointer shadow-lg"
                 >
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-1.5 text-[9px] font-mono uppercase">
-                        <span className="text-[#B6FF5A] font-black bg-[#B6FF5A]/10 px-2 py-0.5 rounded">{article.category}</span>
-                        <span className="text-[#A6B0AA] font-semibold">{article.source}</span>
+                        <span className="text-[var(--accent)] font-black bg-[var(--accent)]/10 px-2 py-0.5 rounded">{article.category}</span>
+                        <span className="text-[var(--text-secondary)] font-semibold">{article.source}</span>
                       </div>
-                      <h3 className="text-xs font-bold text-white leading-snug line-clamp-2 hover:text-[#B6FF5A] transition-colors">
+                      <h3 className="text-xs font-bold text-white leading-snug line-clamp-2 hover:text-[var(--accent)] transition-colors">
                         {article.title}
                       </h3>
                     </div>
 
                     <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-white/10">
-                      <span className="text-[9px] text-[#A6B0AA] font-mono font-semibold">Saved {new Date(article.savedAt).toLocaleDateString()}</span>
+                      <span className="text-[9px] text-[var(--text-secondary)] font-mono font-semibold">Saved {new Date(article.savedAt).toLocaleDateString()}</span>
                       <button
                         onClick={(e) => { e.stopPropagation(); unsaveArticle(article.newsId); }}
                         className="p-1.5 rounded-lg bg-red-500/10 text-red-400 border border-red-500/15 hover:bg-red-500/20 transition-all"
@@ -265,17 +256,17 @@ export const NewsView: React.FC<NewsViewProps> = ({ onShowNewsDetails }) => {
                 </div>
               ))
             ) : (
-              <div className="text-center py-16 bg-[#163A2D]/10 rounded-3xl border border-dashed border-white/5 p-6">
-                <Bookmark className="w-8 h-8 text-[#A6B0AA] mx-auto mb-3" />
-                <p className="text-sm text-[#A6B0AA]">No bookmarked news</p>
-                <p className="text-xs text-[#A6B0AA]/60 mt-1 max-w-xs mx-auto">
+              <div className="text-center py-16 bg-[var(--bg-card)]/10 rounded-3xl border border-dashed border-white/5 p-6">
+                <Bookmark className="w-8 h-8 text-[var(--text-secondary)] mx-auto mb-3" />
+                <p className="text-sm text-[var(--text-secondary)]">No bookmarked news</p>
+                <p className="text-xs text-[var(--text-secondary)]/60 mt-1 max-w-xs mx-auto">
                   Pin stories to review later even when offline or traveling.
                 </p>
               </div>
             )}
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </div>
   );
 };

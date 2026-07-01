@@ -9,7 +9,6 @@ import { FinScopeAPI } from "../services/api";
 import { MarketIndex, NewsItem, StockQuote } from "../types";
 import { MARKET_MOVERS, MARKET_HEATMAP } from "../data";
 import { Search, Bell, Cpu, ArrowUpRight, ArrowDownRight, TrendingUp, Compass, Bookmark, Share2, Sparkles, AlertCircle, RefreshCw } from "lucide-react";
-import { motion } from "motion/react";
 
 interface HomeViewProps {
   onSearchOpen: () => void;
@@ -91,21 +90,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 1. Header with greeting and utilities */}
       <div className="flex items-center justify-between mb-8 px-4 pt-6">
         <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#163A2D] to-[#B6FF5A] p-[2px] shadow-md shrink-0">
-            <div className="w-full h-full rounded-full bg-[#071C16] flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[var(--bg-card)] to-[var(--accent)] p-[2px] shadow-md shrink-0">
+            <div className="w-full h-full rounded-full bg-[var(--bg-primary)] flex items-center justify-center overflow-hidden">
               {user?.photoURL ? (
                 <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               ) : (
-                <span className="text-xs font-bold text-[#B6FF5A] font-mono">
+                <span className="text-xs font-bold text-[var(--accent)] font-mono">
                   {user?.name ? user.name.slice(0, 2).toUpperCase() : "IP"}
                 </span>
               )}
             </div>
           </div>
           <div>
-            <span className="text-[10px] font-mono tracking-widest text-[#A6B0AA] uppercase font-semibold block mb-0.5">PORTFOLIO INTELLIGENCE</span>
+            <span className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase font-semibold block mb-0.5">PORTFOLIO INTELLIGENCE</span>
             <h1 className="font-display text-lg font-black text-white tracking-tight leading-tight" id="home-greeting">
-              Good Morning, <span className="text-[#B6FF5A]">{user?.name || "Investor"}</span>
+              Good Morning, <span className="text-[var(--accent)]">{user?.name || "Investor"}</span>
             </h1>
           </div>
         </div>
@@ -113,7 +112,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           {/* Search Trigger */}
           <button
             onClick={onSearchOpen}
-            className="p-3.5 rounded-[18px] bg-[#163A2D] border border-white/10 text-[#A6B0AA] hover:text-white hover:border-[#B6FF5A]/50 transition-all active:scale-95 shadow-lg"
+            className="p-3.5 rounded-[18px] bg-[var(--bg-card)] border border-white/10 text-[var(--text-secondary)] hover:text-white hover:border-[var(--accent)]/50 transition-all active:scale-95 shadow-lg"
             id="home-search-btn"
           >
             <Search className="w-4 h-4" />
@@ -122,12 +121,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
           {/* Notifications bell */}
           <button
             onClick={onNotificationsOpen}
-            className="p-3.5 rounded-[18px] bg-[#163A2D] border border-white/10 text-[#A6B0AA] hover:text-white hover:border-[#B6FF5A]/50 transition-all active:scale-95 relative shadow-lg"
+            className="p-3.5 rounded-[18px] bg-[var(--bg-card)] border border-white/10 text-[var(--text-secondary)] hover:text-white hover:border-[var(--accent)]/50 transition-all active:scale-95 relative shadow-lg"
             id="home-bell-btn"
           >
             <Bell className="w-4 h-4" />
             {unreadNotifs > 0 && (
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-[#FF5D5D] border border-[#071C16] rounded-full animate-pulse" />
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-[var(--chart-red)] border border-[var(--bg-primary)] rounded-full animate-pulse" />
             )}
           </button>
         </div>
@@ -135,20 +134,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* 2. Hero Card holding market index scroll banner */}
       <div className="px-4 mb-8">
-        <div className="bg-gradient-to-br from-[#163A2D]/90 to-[#0D2B22]/90 backdrop-blur-2xl rounded-[24px] p-6 border border-white/10 relative overflow-hidden shadow-2xl">
+        <div className="bg-gradient-to-br from-[var(--bg-card)]/90 to-[var(--bg-secondary)]/90 backdrop-blur-2xl rounded-[24px] p-6 border border-white/10 relative overflow-hidden shadow-2xl">
           {/* Ambient vector detail graph from Immersive UI design */}
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-15 pointer-events-none">
-            <svg viewBox="0 0 400 200" className="w-full h-full text-[#B6FF5A]" preserveAspectRatio="none">
+            <svg viewBox="0 0 400 200" className="w-full h-full text-[var(--accent)]" preserveAspectRatio="none">
               <path d="M0,150 Q100,140 150,100 T300,80 T400,20" fill="none" stroke="currentColor" strokeWidth="4" />
             </svg>
           </div>
           
           <div className="flex items-center justify-between mb-4 relative z-10">
-            <span className="text-xs font-mono tracking-wider text-[#A6B0AA] flex items-center gap-1.5 font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-[#B6FF5A]" />
+            <span className="text-xs font-mono tracking-wider text-[var(--text-secondary)] flex items-center gap-1.5 font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
               GLOBAL INDICES TIMELINE
             </span>
-            <button onClick={loadHomeData} className="text-[#A6B0AA] hover:text-white transition-colors p-1 bg-white/5 rounded-lg border border-white/5">
+            <button onClick={loadHomeData} className="text-[var(--text-secondary)] hover:text-white transition-colors p-1 bg-white/5 rounded-lg border border-white/5">
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -166,14 +165,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 return (
                   <div
                     key={idx.symbol}
-                    className="min-w-[155px] flex-1 p-4 rounded-[18px] bg-[#071C16]/50 backdrop-blur-sm border border-white/10 hover:border-[#B6FF5A]/30 transition-all cursor-pointer shadow-sm"
+                    className="min-w-[155px] flex-1 p-4 rounded-[18px] bg-[var(--bg-primary)]/50 backdrop-blur-sm border border-white/10 hover:border-[var(--accent)]/30 transition-all cursor-pointer shadow-sm"
                     onClick={() => onSelectAsset(idx.symbol, idx.symbol.includes("BTC") ? "crypto" : "stock")}
                   >
-                    <p className="text-[11px] text-[#A6B0AA] font-bold uppercase tracking-wider">{idx.name}</p>
+                    <p className="text-[11px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">{idx.name}</p>
                     <p className="text-base font-black font-mono mt-1.5 text-white">${idx.price.toLocaleString()}</p>
                     <div className="flex items-center gap-1 mt-1 text-[10px] font-mono">
-                      {positive ? <ArrowUpRight className="w-3 h-3 text-[#92FF5A]" /> : <ArrowDownRight className="w-3 h-3 text-[#FF5D5D]" />}
-                      <span className={positive ? "text-[#92FF5A] font-bold" : "text-[#FF5D5D] font-bold"}>
+                      {positive ? <ArrowUpRight className="w-3 h-3 text-[var(--chart-green)]" /> : <ArrowDownRight className="w-3 h-3 text-[var(--chart-red)]" />}
+                      <span className={positive ? "text-[var(--chart-green)] font-bold" : "text-[var(--chart-red)] font-bold"}>
                         {positive ? "+" : ""}{idx.changePercent}%
                       </span>
                     </div>
@@ -184,7 +183,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         d={`M 0,${15 - (idx.history[0] - Math.min(...idx.history)) / (Math.max(...idx.history) - Math.min(...idx.history) || 1) * 12} ` +
                           idx.history.map((h, i) => `L ${(i / (idx.history.length - 1)) * 100},${15 - (h - Math.min(...idx.history)) / (Math.max(...idx.history) - Math.min(...idx.history) || 1) * 12}`).join(" ")}
                         fill="none"
-                        stroke={positive ? "#92FF5A" : "#FF5D5D"}
+                        stroke={positive ? "var(--chart-green)" : "var(--chart-red)"}
                         strokeWidth="2"
                         strokeLinecap="round"
                       />
@@ -206,13 +205,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 key={act.label}
                 onClick={() => onNavigateTab(act.tab)}
-                className="flex flex-col items-center justify-center p-4 rounded-[18px] bg-[#163A2D]/70 border border-white/10 hover:border-[#B6FF5A]/40 hover:bg-[#163A2D]/90 shadow-lg transition-all active:scale-95 group"
+                className="flex flex-col items-center justify-center p-4 rounded-[18px] bg-[var(--bg-card)]/70 border border-white/10 hover:border-[var(--accent)]/40 hover:bg-[var(--bg-card)]/90 shadow-lg transition-all active:scale-95 group"
                 id={`btn-action-${act.label.toLowerCase().replace(" ", "-")}`}
               >
-                <div className="p-3 rounded-xl bg-white/5 mb-2 group-hover:bg-[#B6FF5A]/10 group-hover:text-[#B6FF5A] transition-colors border border-white/5 group-hover:border-[#B6FF5A]/20">
-                  <Icon className="w-4 h-4 text-[#A6B0AA] group-hover:text-[#B6FF5A] transition-colors" />
+                <div className="p-3 rounded-xl bg-white/5 mb-2 group-hover:bg-[var(--accent)]/10 group-hover:text-[var(--accent)] transition-colors border border-white/5 group-hover:border-[var(--accent)]/20">
+                  <Icon className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
                 </div>
-                <span className="text-[10px] text-[#A6B0AA] font-black uppercase tracking-wider group-hover:text-white transition-colors">{act.label}</span>
+                <span className="text-[10px] text-[var(--text-secondary)] font-black uppercase tracking-wider group-hover:text-white transition-colors">{act.label}</span>
               </button>
             );
           })}
@@ -223,10 +222,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="px-4 mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
-            <Compass className="w-4 h-4 text-[#B6FF5A]" />
+            <Compass className="w-4 h-4 text-[var(--accent)]" />
             Your Watchlist Snapshot
           </h2>
-          <button onClick={() => onNavigateTab("markets")} className="text-xs text-[#B6FF5A] font-bold hover:underline transition-all">
+          <button onClick={() => onNavigateTab("markets")} className="text-xs text-[var(--accent)] font-bold hover:underline transition-all">
             View All
           </button>
         </div>
@@ -242,20 +241,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <div
                   key={item.id}
                   onClick={() => onSelectAsset(item.symbol, item.type)}
-                  className="flex items-center justify-between p-4 rounded-[18px] bg-gradient-to-r from-[#163A2D]/80 to-[#0D2B22]/80 border border-white/10 hover:border-[#B6FF5A]/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
+                  className="flex items-center justify-between p-4 rounded-[18px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-black font-mono bg-[#B6FF5A]/15 border border-[#B6FF5A]/20 text-[#B6FF5A] px-2.5 py-1 rounded-[8px]">
+                    <span className="text-xs font-black font-mono bg-[var(--accent)]/15 border border-[var(--accent)]/20 text-[var(--accent)] px-2.5 py-1 rounded-[8px]">
                       {item.symbol}
                     </span>
                     <div>
                       <p className="text-xs text-white font-bold leading-none">{item.name}</p>
-                      <p className="text-[10px] text-[#A6B0AA] uppercase font-mono tracking-wider mt-1">{item.type}</p>
+                      <p className="text-[10px] text-[var(--text-secondary)] uppercase font-mono tracking-wider mt-1">{item.type}</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-xs font-black font-mono text-white">${price.toFixed(2)}</p>
-                    <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${isPos ? "text-[#92FF5A]" : "text-[#FF5D5D]"}`}>
+                    <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${isPos ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
                       {isPos ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                       {isPos ? "+" : ""}{change.toFixed(2)}%
                     </span>
@@ -265,9 +264,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
             })}
           </div>
         ) : (
-          <div className="text-center py-8 bg-[#163A2D]/30 rounded-[24px] border border-dashed border-white/15">
-            <p className="text-xs text-[#A6B0AA]">No items in your watchlist.</p>
-            <button onClick={onSearchOpen} className="text-xs text-[#B6FF5A] font-bold mt-2 hover:underline">
+          <div className="text-center py-8 bg-[var(--bg-card)]/30 rounded-[24px] border border-dashed border-white/15">
+            <p className="text-xs text-[var(--text-secondary)]">No items in your watchlist.</p>
+            <button onClick={onSearchOpen} className="text-xs text-[var(--accent)] font-bold mt-2 hover:underline">
               Search Tickers to Add
             </button>
           </div>
@@ -277,7 +276,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 5. Trending News Feed with instant AI summary */}
       <div className="px-4 mb-8">
         <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white mb-4 flex items-center gap-1.5">
-          <Bookmark className="w-4 h-4 text-[#B6FF5A]" />
+          <Bookmark className="w-4 h-4 text-[var(--accent)]" />
           TRENDING NEWS BRIEFS
         </h2>
         
@@ -293,39 +292,36 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div
                 key={item.id}
                 onClick={() => onShowNewsDetails(item)}
-                className="bg-gradient-to-br from-[#163A2D]/90 to-[#0D2B22]/90 backdrop-blur-md border border-white/10 rounded-[24px] overflow-hidden hover:border-[#B6FF5A]/40 hover:shadow-2xl transition-all cursor-pointer group shadow-xl"
+                className="bg-gradient-to-br from-[var(--bg-card)]/90 to-[var(--bg-secondary)]/90 backdrop-blur-md border border-white/10 rounded-[24px] overflow-hidden hover:border-[var(--accent)]/40 hover:shadow-2xl transition-all cursor-pointer group shadow-xl"
               >
                 {/* News Thumbnail Card with absolute styling */}
                 <div className="relative h-44 overflow-hidden">
                   <img src={item.image} alt={item.headline} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071C16] via-[#071C16]/20 to-transparent" />
-                  <span className="absolute top-4 left-4 bg-[#B6FF5A] text-[#071C16] text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-[8px] shadow-lg">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/20 to-transparent" />
+                  <span className="absolute top-4 left-4 bg-[var(--accent)] text-[var(--bg-primary)] text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-[8px] shadow-lg">
                     {item.category}
                   </span>
                 </div>
 
                 <div className="p-5">
-                  <div className="flex items-center justify-between text-[10px] text-[#A6B0AA] mb-2 font-mono font-semibold">
+                  <div className="flex items-center justify-between text-[10px] text-[var(--text-secondary)] mb-2 font-mono font-semibold">
                     <span>{item.source}</span>
                     <span>{item.readTime || "3m read"}</span>
                   </div>
-                  <h3 className="text-sm font-bold text-white leading-snug group-hover:text-[#B6FF5A] transition-colors line-clamp-2">
+                  <h3 className="text-sm font-bold text-white leading-snug group-hover:text-[var(--accent)] transition-colors line-clamp-2">
                     {item.headline}
                   </h3>
 
                   {/* Summary display if active */}
                   {activeSummary && activeSummary.id === item.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      className="mt-4 p-4 bg-[#071C16]/80 rounded-[18px] border border-[#B6FF5A]/20 text-xs text-[#A6B0AA] leading-relaxed shadow-inner"
+                    <div className="mt-4 p-4 bg-[var(--bg-primary)]/80 rounded-[18px] border border-[var(--accent)]/20 text-xs text-[var(--text-secondary)] leading-relaxed shadow-inner"
                     >
-                      <div className="flex items-center gap-1.5 text-[10px] text-[#B6FF5A] font-black uppercase mb-1.5 font-mono tracking-wider">
+                      <div className="flex items-center gap-1.5 text-[10px] text-[var(--accent)] font-black uppercase mb-1.5 font-mono tracking-wider">
                         <Sparkles className="w-3.5 h-3.5 animate-pulse" />
                         FinScope AI summary
                       </div>
                       {activeSummary.text}
-                    </motion.div>
+                    </div>
                   )}
 
                   {/* Summarize Action Buttons */}
@@ -333,7 +329,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <button
                       onClick={(e) => handleAISummarize(e, item)}
                       disabled={summarizingId === item.id}
-                      className="flex items-center gap-1.5 text-xs text-[#B6FF5A] font-black uppercase tracking-wider hover:text-[#D8FF7E] transition-colors"
+                      className="flex items-center gap-1.5 text-xs text-[var(--accent)] font-black uppercase tracking-wider hover:text-[var(--accent-highlight)] transition-colors"
                     >
                       <Sparkles className="w-3.5 h-3.5 animate-pulse" />
                       {summarizingId === item.id ? "Analyzing..." : "AI Summarize"}
@@ -341,8 +337,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <div className="flex gap-2">
                       <button
                         onClick={(e) => handleSaveArticle(e, item)}
-                        className={`p-2 rounded-xl border border-white/10 hover:bg-[#B6FF5A]/15 hover:border-[#B6FF5A]/30 hover:text-[#B6FF5A] transition-all ${
-                          savedArticles.some(sa => sa.newsId === item.id) ? "text-[#B6FF5A] bg-[#B6FF5A]/10 border-[#B6FF5A]/30" : "text-[#A6B0AA]"
+                        className={`p-2 rounded-xl border border-white/10 hover:bg-[var(--accent)]/15 hover:border-[var(--accent)]/30 hover:text-[var(--accent)] transition-all ${
+                          savedArticles.some(sa => sa.newsId === item.id) ? "text-[var(--accent)] bg-[var(--accent)]/10 border-[var(--accent)]/30" : "text-[var(--text-secondary)]"
                         }`}
                       >
                         <Bookmark className="w-3.5 h-3.5" />
@@ -360,16 +356,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="px-4 mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
-            <TrendingUp className="w-4 h-4 text-[#B6FF5A]" />
+            <TrendingUp className="w-4 h-4 text-[var(--accent)]" />
             Market Movers
           </h2>
-          <div className="flex bg-[#163A2D] rounded-[14px] p-1 border border-white/10 shadow-md">
+          <div className="flex bg-[var(--bg-card)] rounded-[14px] p-1 border border-white/10 shadow-md">
             {(["gainers", "losers", "active"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setMoversTab(tab)}
                 className={`px-3 py-1 rounded-[10px] text-[10px] font-black uppercase tracking-wider transition-all ${
-                  moversTab === tab ? "bg-[#B6FF5A] text-[#071C16] shadow-md" : "text-[#A6B0AA] hover:text-white"
+                  moversTab === tab ? "bg-[var(--accent)] text-[var(--bg-primary)] shadow-md" : "text-[var(--text-secondary)] hover:text-white"
                 }`}
               >
                 {tab}
@@ -378,7 +374,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-[#163A2D]/80 to-[#0D2B22]/80 border border-white/10 rounded-[24px] p-4 shadow-xl">
+        <div className="bg-gradient-to-br from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 rounded-[24px] p-4 shadow-xl">
           <div className="space-y-3">
             {moversTab === "gainers" && MARKET_MOVERS.gainers.map((m) => (
               <div
@@ -387,14 +383,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-white/[0.04] transition-all cursor-pointer border border-transparent hover:border-white/5"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-black font-mono text-[#B6FF5A] bg-[#B6FF5A]/10 border border-[#B6FF5A]/25 px-2.5 py-1 rounded-[6px]">
+                  <span className="text-xs font-black font-mono text-[var(--accent)] bg-[var(--accent)]/10 border border-[var(--accent)]/25 px-2.5 py-1 rounded-[6px]">
                     {m.symbol}
                   </span>
                   <span className="text-xs font-bold text-white">{m.name}</span>
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-black font-mono text-white">${m.price.toFixed(2)}</p>
-                  <p className="text-[10px] font-mono text-[#92FF5A] font-extrabold">+{m.changePercent}%</p>
+                  <p className="text-[10px] font-mono text-[var(--chart-green)] font-extrabold">+{m.changePercent}%</p>
                 </div>
               </div>
             ))}
@@ -406,14 +402,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-white/[0.04] transition-all cursor-pointer border border-transparent hover:border-white/5"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-black font-mono text-[#FF5D5D] bg-[#FF5D5D]/10 border border-[#FF5D5D]/25 px-2.5 py-1 rounded-[6px]">
+                  <span className="text-xs font-black font-mono text-[var(--chart-red)] bg-[var(--chart-red)]/10 border border-[var(--chart-red)]/25 px-2.5 py-1 rounded-[6px]">
                     {m.symbol}
                   </span>
                   <span className="text-xs font-bold text-white">{m.name}</span>
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-black font-mono text-white">${m.price.toFixed(2)}</p>
-                  <p className="text-[10px] font-mono text-[#FF5D5D] font-extrabold">{m.changePercent}%</p>
+                  <p className="text-[10px] font-mono text-[var(--chart-red)] font-extrabold">{m.changePercent}%</p>
                 </div>
               </div>
             ))}
@@ -432,7 +428,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-black font-mono text-white">${m.price.toFixed(2)}</p>
-                  <p className="text-[10px] font-mono text-[#A6B0AA] font-bold">Vol: {m.volume}</p>
+                  <p className="text-[10px] font-mono text-[var(--text-secondary)] font-bold">Vol: {m.volume}</p>
                 </div>
               </div>
             ))}
@@ -443,13 +439,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 7. Sector Heatmap cards */}
       <div className="px-4">
         <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white mb-4 flex items-center gap-1.5">
-          <Compass className="w-4 h-4 text-[#B6FF5A]" />
+          <Compass className="w-4 h-4 text-[var(--accent)]" />
           Market Heatmap Sectors
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {MARKET_HEATMAP.map((sec) => (
-            <div key={sec.sector} className="p-5 rounded-[24px] bg-gradient-to-br from-[#163A2D]/80 to-[#0D2B22]/80 border border-white/10 flex flex-col justify-between shadow-xl">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-[#A6B0AA] mb-4 font-bold">{sec.sector}</span>
+            <div key={sec.sector} className="p-5 rounded-[24px] bg-gradient-to-br from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 flex flex-col justify-between shadow-xl">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--text-secondary)] mb-4 font-bold">{sec.sector}</span>
               <div className="flex gap-2.5">
                 {sec.companies.map((co) => {
                   const positive = co.change >= 0;
@@ -459,12 +455,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       onClick={() => onSelectAsset(co.symbol, co.symbol === "BTC" || co.symbol === "ETH" ? "crypto" : "stock")}
                       className={`flex-1 p-3 rounded-[14px] text-center cursor-pointer transition-all hover:scale-105 shadow-sm ${
                         positive 
-                          ? "bg-emerald-500/10 border border-[#92FF5A]/30 hover:border-[#92FF5A]/50" 
-                          : "bg-red-500/10 border border-[#FF5D5D]/30 hover:border-[#FF5D5D]/50"
+                          ? "bg-emerald-500/10 border border-[var(--chart-green)]/30 hover:border-[var(--chart-green)]/50" 
+                          : "bg-red-500/10 border border-[var(--chart-red)]/30 hover:border-[var(--chart-red)]/50"
                       }`}
                     >
                       <p className="text-xs font-black font-mono text-white">{co.symbol}</p>
-                      <p className={`text-[10px] font-mono font-black mt-1 ${positive ? "text-[#92FF5A]" : "text-[#FF5D5D]"}`}>
+                      <p className={`text-[10px] font-mono font-black mt-1 ${positive ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
                         {positive ? "+" : ""}{co.change}%
                       </p>
                     </div>

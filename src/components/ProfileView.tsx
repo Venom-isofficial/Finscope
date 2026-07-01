@@ -6,7 +6,6 @@
 import React from "react";
 import { useApp } from "../context/AppContext";
 import { User, Shield, Palette, Bell, HelpCircle, LogOut, Trash2, Layers, BookOpen, Compass, Check } from "lucide-react";
-import { motion } from "motion/react";
 
 export const ProfileView: React.FC = () => {
   const { user, settings, updateSettings, watchlist, savedArticles, logout, clearCache, deleteAccount } = useApp();
@@ -92,12 +91,12 @@ export const ProfileView: React.FC = () => {
             onClick={() => handleThemeChange("dark-green")}
             className={`p-3.5 rounded-[20px] border text-center transition-all duration-300 relative overflow-hidden group cursor-pointer ${
               settings.theme === "dark-green"
-                ? "bg-[#163A2D] border-[#B6FF5A] text-white shadow-lg shadow-[#B6FF5A]/10 font-black ring-1 ring-[#B6FF5A]/30"
+                ? "bg-[var(--bg-card)] border-[var(--accent)] text-white shadow-lg shadow-[var(--accent)]/10 font-black ring-1 ring-[var(--accent)]/30"
                 : "glass-panel border-white/5 text-[var(--text-secondary)] hover:border-white/20 hover:text-[var(--text-primary)] font-bold"
             }`}
           >
-            <div className="w-5 h-5 rounded-full bg-[#071C16] mx-auto mb-2 border border-[#B6FF5A]/40 flex items-center justify-center">
-              {settings.theme === "dark-green" && <Check className="w-3 h-3 text-[#B6FF5A]" />}
+            <div className="w-5 h-5 rounded-full bg-[var(--bg-primary)] mx-auto mb-2 border border-[var(--accent)]/40 flex items-center justify-center">
+              {settings.theme === "dark-green" && <Check className="w-3 h-3 text-[var(--accent)]" />}
             </div>
             <p className="text-[10px] tracking-wide uppercase font-mono">Forest</p>
           </button>
