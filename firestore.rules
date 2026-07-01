@@ -1,73 +1,168 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // Default Deny catch-all rule
     match /{document=**} {
       allow read, write: if false;
     }
 
-    // Helper functions
-    function isSignedIn() {
-      return request.auth != null;
+    // Global Helpers
+    function isSignedIn() { return request.auth != null; }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function isVerified() { return isSignedIn() && request.auth.token.email_verified == true; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+
+    // Validation Helpers
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'name']) &&
+             data.uid == request.auth.uid &&
+             data.email is string && data.email.size() >= 3 && data.email.size() <= 255 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             (data.get('country', '') is string) &&
+             (data.get('membership', 'Free') in ['Free', 'Pro', 'Premium']) &&
+             (data.get('createdAt', request.time) == request.time || data.get('createdAt', null) is timestamp) &&
+             (data.get('photoURL', '') is string);
     }
 
-    function isOwner(userId) {
-      return isSignedIn() && request.auth.uid == userId;
+    function isValidWatchlist(data) {
+      return data.keys().hasAll(['id', 'userId', 'symbol', 'name', 'type']) &&
+             data.userId == request.auth.uid &&
+             data.id is string && data.id.size() <= 128 &&
+             data.symbol is string && data.symbol.size() > 0 && data.symbol.size() <= 20 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.type in ['stock', 'crypto', 'etf'] &&
+             (data.get('addedAt', request.time) == request.time || data.get('addedAt', null) is timestamp);
     }
 
-    function isDocOwner() {
-      return isSignedIn() && resource.data.userId == request.auth.uid;
+    function isValidSavedArticle(data) {
+      return data.keys().hasAll(['id', 'userId', 'newsId', 'title', 'url', 'savedAt']) &&
+             data.userId == request.auth.uid &&
+             data.id is string && data.id.size() <= 128 &&
+             data.newsId is string && data.newsId.size() <= 255 &&
+             data.title is string && data.title.size() <= 500 &&
+             data.url is string && data.url.size() <= 2000 &&
+             (data.get('summary', '') is string) &&
+             (data.get('source', '') is string) &&
+             (data.get('image', '') is string) &&
+             (data.get('category', '') is string) &&
+             (data.get('datetime', 0) is number) &&
+             (data.get('savedAt', request.time) == request.time || data.get('savedAt', null) is timestamp);
     }
 
-    function incomingDocOwner() {
-      return isSignedIn() && request.resource.data.userId == request.auth.uid;
+    function isValidAlert(data) {
+      return data.keys().hasAll(['id', 'userId', 'symbol', 'targetPrice', 'condition', 'type', 'isActive', 'createdAt']) &&
+             data.userId == request.auth.uid &&
+             data.id is string && data.id.size() <= 128 &&
+             data.symbol is string && data.symbol.size() > 0 && data.symbol.size() <= 20 &&
+             (data.get('name', '') is string) &&
+             data.targetPrice is number &&
+             data.condition in ['above', 'below'] &&
+             data.type in ['price', 'news'] &&
+             data.isActive is bool &&
+             (data.get('createdAt', request.time) == request.time || data.get('createdAt', null) is timestamp);
     }
 
-    // --- USERS Collection ---
+    function isValidRecentSearch(data) {
+      return data.keys().hasAll(['id', 'userId', 'query', 'searchedAt']) &&
+             data.userId == request.auth.uid &&
+             data.id is string && data.id.size() <= 128 &&
+             data.query is string && data.query.size() > 0 && data.query.size() <= 255 &&
+             (data.get('type', '') is string) &&
+             (data.get('searchedAt', request.time) == request.time || data.get('searchedAt', null) is timestamp);
+    }
+
+    function isValidNotification(data) {
+      return data.keys().hasAll(['id', 'userId', 'title', 'message', 'category', 'timestamp', 'isRead']) &&
+             data.userId == request.auth.uid &&
+             data.id is string && data.id.size() <= 128 &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 255 &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 1000 &&
+             data.category in ['Today', 'Yesterday', 'Earlier'] &&
+             (data.get('type', '') is string) &&
+             data.isRead is bool &&
+             (data.get('timestamp', request.time) == request.time || data.get('timestamp', null) is timestamp);
+    }
+
+    function isValidChatHistory(data) {
+      return data.keys().hasAll(['id', 'userId', 'sender', 'message', 'timestamp']) &&
+             data.userId == request.auth.uid &&
+             data.id is string && data.id.size() <= 128 &&
+             data.sender in ['user', 'ai'] &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 5000 &&
+             (data.get('timestamp', request.time) == request.time || data.get('timestamp', null) is timestamp);
+    }
+
+    function isValidSettings(data) {
+      return data.keys().hasAll(['userId', 'theme', 'pushNotifications', 'emailNotifications']) &&
+             data.userId == request.auth.uid &&
+             data.theme in ['dark-green', 'light', 'midnight'] &&
+             data.pushNotifications is bool &&
+             data.emailNotifications is bool &&
+             (data.get('language', '') is string) &&
+             (data.get('currency', '') is string) &&
+             (data.get('country', '') is string) &&
+             (data.get('updatedAt', request.time) == request.time || data.get('updatedAt', null) is timestamp);
+    }
+
+    // users collection
     match /users/{userId} {
-      allow read, write: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow create: if isOwner(userId) && isValidId(userId) && isValidUser(incoming()) && incoming().createdAt == request.time;
+      allow update: if isOwner(userId) && isValidId(userId) && isValidUser(incoming()) && incoming().uid == existing().uid && incoming().createdAt == existing().createdAt;
     }
 
-    // --- WATCHLISTS Collection ---
-    match /watchlists/{watchlistId} {
-      allow create: if isSignedIn() && incomingDocOwner();
-      allow read, update, delete: if isSignedIn() && (resource == null || isDocOwner());
-    }
-
-    // --- SAVED ARTICLES Collection ---
-    match /savedArticles/{savedArticleId} {
-      allow create: if isSignedIn() && incomingDocOwner();
-      allow read, update, delete: if isSignedIn() && (resource == null || isDocOwner());
-    }
-
-    // --- ALERTS Collection ---
-    match /alerts/{alertId} {
-      allow create: if isSignedIn() && incomingDocOwner();
-      allow read, update, delete: if isSignedIn() && (resource == null || isDocOwner());
-    }
-
-    // --- RECENT SEARCHES Collection ---
-    match /recentSearches/{recentSearchId} {
-      allow create: if isSignedIn() && incomingDocOwner();
-      allow read, update, delete: if isSignedIn() && (resource == null || isDocOwner());
-    }
-
-    // --- NOTIFICATIONS Collection ---
-    match /notifications/{notificationId} {
-      allow create: if isSignedIn() && incomingDocOwner();
-      allow read, update, delete: if isSignedIn() && (resource == null || isDocOwner());
-    }
-
-    // --- CHAT HISTORY Collection ---
-    match /chatHistory/{chatId} {
-      allow create: if isSignedIn() && incomingDocOwner();
-      allow read, update, delete: if isSignedIn() && (resource == null || isDocOwner());
-    }
-
-    // --- SETTINGS Collection ---
+    // settings collection
     match /settings/{userId} {
-      allow read, write: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow create: if isOwner(userId) && isValidId(userId) && isValidSettings(incoming());
+      allow update: if isOwner(userId) && isValidId(userId) && isValidSettings(incoming()) && incoming().userId == existing().userId;
+    }
+
+    // watchlists collection
+    match /watchlists/{watchlistId} {
+      allow get, update, delete: if false; // Disallow these for now if not explicitly needed, or only allow list/create/delete
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(watchlistId) && isValidWatchlist(incoming());
+      allow delete: if isSignedIn() && isValidId(watchlistId) && existing().userId == request.auth.uid;
+    }
+
+    // savedArticles collection
+    match /savedArticles/{savedArticleId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(savedArticleId) && isValidSavedArticle(incoming());
+      allow delete: if isSignedIn() && isValidId(savedArticleId) && existing().userId == request.auth.uid;
+    }
+
+    // alerts collection
+    match /alerts/{alertId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(alertId) && isValidAlert(incoming());
+      allow update: if isSignedIn() && isValidId(alertId) && isValidAlert(incoming()) && incoming().userId == existing().userId && incoming().createdAt == existing().createdAt;
+      allow delete: if isSignedIn() && isValidId(alertId) && existing().userId == request.auth.uid;
+    }
+
+    // recentSearches collection
+    match /recentSearches/{recentSearchId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(recentSearchId) && isValidRecentSearch(incoming());
+      allow delete: if isSignedIn() && isValidId(recentSearchId) && existing().userId == request.auth.uid;
+    }
+
+    // notifications collection
+    match /notifications/{notificationId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if false; // System generated only
+      allow update: if isSignedIn() && isValidId(notificationId) && isValidNotification(incoming()) && incoming().userId == existing().userId && incoming().diff(existing()).affectedKeys().hasOnly(['isRead']);
+      allow delete: if isSignedIn() && isValidId(notificationId) && existing().userId == request.auth.uid;
+    }
+
+    // chatHistory collection
+    match /chatHistory/{chatId} {
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(chatId) && isValidChatHistory(incoming());
+      allow delete: if isSignedIn() && isValidId(chatId) && existing().userId == request.auth.uid;
     }
   }
 }

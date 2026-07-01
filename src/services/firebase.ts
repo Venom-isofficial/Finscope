@@ -1,42 +1,39 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getAnalytics, isSupported } from "firebase/analytics";
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import firebaseConfig from '../../firebase-applet-config.json';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAZREClRI-Az-m4pKDgaeWr8pcX2rcUUnU",
-  authDomain: "stock-news-application.firebaseapp.com",
-  projectId: "stock-news-application",
-  storageBucket: "stock-news-application.firebasestorage.app",
-  messagingSenderId: "501179853822",
-  appId: "1:501179853822:web:ccd2eef3764b4f15172eaf",
-  measurementId: "G-5G9PF3GY50"
-};
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize analytics safely
-let analytics: any = null;
-if (typeof window !== "undefined") {
-  isSupported().then((supported) => {
-    if (supported) {
-      try {
-        analytics = getAnalytics(app);
-      } catch (err) {
-        console.warn("Firebase Analytics could not be initialized:", err);
-      }
-    }
-  }).catch((err) => {
-    console.warn("Firebase Analytics isSupported check failed:", err);
-  });
-}
-
-// Export initialized services
+export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
-export { analytics };
-
-// Providers
 export const googleProvider = new GoogleAuthProvider();
 export const appleProvider = new OAuthProvider('apple.com');
+
+export const loginWithGoogle = async () => {
+  try {
+    await signInWithPopup(auth, googleProvider);
+  } catch (error) {
+    console.error("Login failed:", error);
+    throw error;
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Logout failed:", error);
+    throw error;
+  }
+};
+
+async function testConnection() {
+  try {
+    await getDocFromServer(doc(db, 'test', 'connection'));
+  } catch (error) {
+    if(error instanceof Error && error.message.includes('the client is offline')) {
+      console.error("Please check your Firebase configuration.");
+    }
+  }
+}
+testConnection();
