@@ -111,6 +111,13 @@ service cloud.firestore {
       allow get: if isOwner(userId) && isValidId(userId);
       allow create: if isOwner(userId) && isValidId(userId) && isValidUser(incoming()) && incoming().createdAt == request.time;
       allow update: if isOwner(userId) && isValidId(userId) && isValidUser(incoming()) && incoming().uid == existing().uid && incoming().createdAt == existing().createdAt;
+      
+      // subcollection: chatHistory
+      match /chatHistory/{chatId} {
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(chatId) && isValidChatHistory(incoming());
+        allow delete: if isOwner(userId) && isValidId(chatId);
+      }
     }
 
     // settings collection
@@ -156,13 +163,6 @@ service cloud.firestore {
       allow create: if false; // System generated only
       allow update: if isSignedIn() && isValidId(notificationId) && isValidNotification(incoming()) && incoming().userId == existing().userId && incoming().diff(existing()).affectedKeys().hasOnly(['isRead']);
       allow delete: if isSignedIn() && isValidId(notificationId) && existing().userId == request.auth.uid;
-    }
-
-    // chatHistory collection
-    match /chatHistory/{chatId} {
-      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
-      allow create: if isSignedIn() && isValidId(chatId) && isValidChatHistory(incoming());
-      allow delete: if isSignedIn() && isValidId(chatId) && existing().userId == request.auth.uid;
     }
   }
 }

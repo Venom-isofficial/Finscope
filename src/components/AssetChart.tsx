@@ -100,7 +100,7 @@ export const AssetChart: React.FC<AssetChartProps> = ({ data, color = "var(--cha
             {hoverIndex !== null ? "TRACKING PRICE" : "CURRENT VALUE"}
           </span>
           <div className="flex items-baseline gap-2">
-            <h3 className="text-2xl font-bold font-mono tracking-tight text-white">
+            <h3 className="text-2xl font-bold font-mono tracking-tight text-brand-text-primary">
               ${(hoverIndex !== null ? svgPoints[hoverIndex].value : points[points.length - 1]).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </h3>
             <span className={`text-xs font-bold font-mono ${isPositive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
@@ -110,7 +110,7 @@ export const AssetChart: React.FC<AssetChartProps> = ({ data, color = "var(--cha
         </div>
 
         {/* Time filters */}
-        <div className="flex gap-1 bg-white/5 p-1 rounded-xl border border-white/5">
+        <div className="flex gap-1 bg-brand-text-primary/5 p-1 rounded-xl border border-brand-text-primary/5">
           {(["1D", "1W", "1M", "6M", "1Y"] as const).map((tab) => (
             <button
               key={tab}
@@ -118,7 +118,7 @@ export const AssetChart: React.FC<AssetChartProps> = ({ data, color = "var(--cha
               className={`px-2.5 py-1 rounded-lg text-[10px] font-bold tracking-wider transition-all duration-300 ${
                 activeTab === tab
                   ? "bg-brand-btn-accent text-brand-primary shadow-sm"
-                  : "text-brand-text-secondary hover:text-white"
+                  : "text-brand-text-secondary hover:text-brand-text-primary"
               }`}
             >
               {tab}

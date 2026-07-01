@@ -191,7 +191,7 @@ const MainAppContent: React.FC = () => {
             key="dashboard" className="w-full min-h-screen flex flex-col md:flex-row bg-transparent relative z-10"
           >
             {/* Desktop Left Sidebar Navigation - Hidden on mobile */}
-            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-brand-secondary/30 backdrop-blur-xl border-r border-white/5 p-6 h-screen sticky top-0 justify-between">
+            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-brand-secondary/30 backdrop-blur-xl border-r border-brand-text-primary/5 p-6 h-screen sticky top-0 justify-between">
               <div className="flex flex-col">
                 {/* Logo or Brand */}
                 <div className="flex items-center gap-3 mb-8 px-2">
@@ -201,16 +201,16 @@ const MainAppContent: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-brand-text-primary font-display font-black text-sm uppercase tracking-wider leading-none">FinScope</h2>
-                    <span className="text-[8px] font-mono tracking-widest text-brand-text-secondary/70 block mt-1 uppercase font-black">AI Portfolio Intel</span>
+                    <h2 className="text-brand-text-primary font-display font-bold text-sm uppercase tracking-wider leading-none">FinScope</h2>
+                    <span className="text-[8px] font-mono tracking-widest text-brand-text-secondary/70 block mt-1 uppercase font-bold">AI Portfolio Intel</span>
                   </div>
                 </div>
 
                 {/* User Profile Info on sidebar */}
                 {user && (
-                  <div className="p-4 rounded-2xl bg-brand-card/40 border border-white/5 mb-6">
+                  <div className="p-4 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full border border-brand-accent/20 flex items-center justify-center text-brand-accent font-black font-display bg-brand-card shadow-md overflow-hidden shrink-0">
+                      <div className="w-10 h-10 rounded-full border border-brand-accent/20 flex items-center justify-center text-brand-accent font-bold font-display bg-brand-card shadow-md overflow-hidden shrink-0">
                         {user.photoURL ? (
                           <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                         ) : (
@@ -220,9 +220,9 @@ const MainAppContent: React.FC = () => {
                         )}
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs font-black text-brand-text-primary truncate">{user.name || "Investor"}</p>
+                        <p className="text-xs font-bold text-brand-text-primary truncate">{user.name || "Investor"}</p>
                         <p className="text-[9px] text-brand-text-secondary truncate font-medium">{user.email || "guest@finscope.ai"}</p>
-                        <span className="text-[8px] font-mono font-black tracking-widest bg-brand-accent/15 border border-brand-accent/25 text-brand-accent px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
+                        <span className="text-[8px] font-mono font-bold tracking-widest bg-brand-accent/15 border border-brand-accent/25 text-brand-accent px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
                           {user.membership || "Pro"}
                         </span>
                       </div>
@@ -263,7 +263,7 @@ const MainAppContent: React.FC = () => {
               </div>
 
               {/* Sidebar bottom indicator */}
-              <div className="text-[9px] text-brand-text-secondary/40 font-mono tracking-wider pt-4 border-t border-white/5">
+              <div className="text-[9px] text-brand-text-secondary/40 font-mono tracking-wider pt-4 border-t border-brand-text-primary/5">
                 <p>FinScope AI v1.0.0</p>
                 <p className="mt-1">© 2026 FinScope.ai</p>
               </div>
@@ -344,7 +344,7 @@ const MainAppContent: React.FC = () => {
             />
 
             {/* The Sheet */}
-            <div className="relative w-full max-w-xl mx-auto bg-brand-secondary border-t border-white/10 rounded-t-[32px] p-6 max-h-[90vh] overflow-y-auto z-10 shadow-2xl pb-16"
+            <div className="relative w-full max-w-xl mx-auto bg-brand-secondary border-t border-brand-text-primary/5 rounded-t-[32px] p-6 max-h-[90vh] overflow-y-auto z-10 shadow-lg shadow-black/5 shadow-black/10 pb-16"
               id="details-sheet"
             >
               {/* Drag bar indicator */}
@@ -353,11 +353,11 @@ const MainAppContent: React.FC = () => {
               {/* Top Row with closer & watchlist toggle */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 bg-brand-card rounded-2xl border border-white/5 font-bold font-mono text-brand-accent text-xs">
+                  <div className="p-3 bg-brand-card rounded-2xl border border-brand-text-primary/5 font-bold font-mono text-brand-accent text-xs">
                     {selectedAsset.symbol}
                   </div>
                   <div>
-                    <h2 className="text-sm font-bold text-white tracking-tight">{companyProfile?.name || selectedAsset.symbol}</h2>
+                    <h2 className="text-sm font-bold text-brand-text-primary tracking-tight">{companyProfile?.name || selectedAsset.symbol}</h2>
                     <p className="text-[10px] text-brand-text-secondary uppercase tracking-widest font-mono mt-0.5">{selectedAsset.type}</p>
                   </div>
                 </div>
@@ -368,14 +368,14 @@ const MainAppContent: React.FC = () => {
                     className={`p-3 rounded-2xl border transition-all ${
                       isWatch
                         ? "bg-brand-accent/10 border-brand-accent/20 text-brand-accent"
-                        : "bg-white/5 border-white/5 text-brand-text-secondary hover:text-white"
+                        : "bg-brand-text-primary/5 border-brand-text-primary/5 text-brand-text-secondary hover:text-brand-text-primary"
                     }`}
                   >
                     <Star className="w-4 h-4 fill-current" />
                   </button>
                   <button
                     onClick={() => setSelectedAsset(null)}
-                    className="p-3 rounded-2xl bg-white/5 border border-white/5 text-brand-text-secondary hover:text-white transition-all"
+                    className="p-3 rounded-2xl bg-brand-text-primary/5 border border-brand-text-primary/5 text-brand-text-secondary hover:text-brand-text-primary transition-all duration-200 ease-out"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -383,7 +383,7 @@ const MainAppContent: React.FC = () => {
               </div>
 
               {/* Asset Chart panel */}
-              <div className="bg-brand-card/40 border border-white/5 rounded-3xl p-5 mb-6">
+              <div className="bg-brand-card/40 border border-brand-text-primary/5 rounded-2xl p-5 mb-6">
                 {loadingAsset ? (
                   <div className="h-44 flex items-center justify-center">
                     <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
@@ -402,34 +402,34 @@ const MainAppContent: React.FC = () => {
               {/* Valuation stats grid */}
               {assetQuote && (
                 <div className="grid grid-cols-4 gap-2 mb-6 text-center">
-                  <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <div className="p-3 rounded-2xl bg-brand-text-primary/[0.02] border border-brand-text-primary/5">
                     <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">High</span>
-                    <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.high.toFixed(2)}</p>
+                    <p className="text-xs font-bold font-mono text-brand-text-primary mt-1">${assetQuote.high.toFixed(2)}</p>
                   </div>
-                  <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <div className="p-3 rounded-2xl bg-brand-text-primary/[0.02] border border-brand-text-primary/5">
                     <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">Low</span>
-                    <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.low.toFixed(2)}</p>
+                    <p className="text-xs font-bold font-mono text-brand-text-primary mt-1">${assetQuote.low.toFixed(2)}</p>
                   </div>
-                  <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <div className="p-3 rounded-2xl bg-brand-text-primary/[0.02] border border-brand-text-primary/5">
                     <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">Open</span>
-                    <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.open.toFixed(2)}</p>
+                    <p className="text-xs font-bold font-mono text-brand-text-primary mt-1">${assetQuote.open.toFixed(2)}</p>
                   </div>
-                  <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <div className="p-3 rounded-2xl bg-brand-text-primary/[0.02] border border-brand-text-primary/5">
                     <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">Close</span>
-                    <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.prevClose.toFixed(2)}</p>
+                    <p className="text-xs font-bold font-mono text-brand-text-primary mt-1">${assetQuote.prevClose.toFixed(2)}</p>
                   </div>
                 </div>
               )}
 
               {/* Set custom alert panel */}
-              <div className="bg-brand-card/20 border border-white/5 rounded-3xl p-5 mb-6">
+              <div className="bg-brand-card/20 border border-brand-text-primary/5 rounded-2xl p-5 mb-6">
                 <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase mb-4 flex items-center gap-1.5">
                   <Bell className="w-4 h-4 text-brand-accent" />
                   Add Target Threshold Alert
                 </h3>
                 
                 {alertSuccess ? (
-                  <div className="flex items-center gap-2 bg-brand-chart-green/10 border border-brand-chart-green/20 p-4 rounded-2xl text-xs text-white"
+                  <div className="flex items-center gap-2 bg-brand-chart-green/10 border border-brand-chart-green/20 p-4 rounded-2xl text-xs text-brand-text-primary"
                   >
                     <CheckCircle className="w-5 h-5 text-brand-chart-green" />
                     Target threshold alert compiled successfully!
@@ -440,7 +440,7 @@ const MainAppContent: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setAlertCondition(alertCondition === "above" ? "below" : "above")}
-                      className="px-3.5 py-3 rounded-xl bg-brand-card text-[10px] font-bold uppercase border border-white/5 text-brand-accent tracking-wider"
+                      className="px-3.5 py-3 rounded-xl bg-brand-card text-[10px] font-bold uppercase border border-brand-text-primary/5 text-brand-accent tracking-wider"
                     >
                       {alertCondition === "above" ? "Goes Above" : "Goes Below"}
                     </button>
@@ -453,14 +453,14 @@ const MainAppContent: React.FC = () => {
                         value={alertPrice}
                         onChange={(e) => setAlertPrice(e.target.value)}
                         placeholder="Target Price"
-                        className="w-full pl-7 pr-3 py-3 rounded-xl bg-brand-card border border-white/5 focus:border-brand-accent/20 outline-none text-xs font-mono text-white"
+                        className="w-full pl-7 pr-3 py-3 rounded-xl bg-brand-card border border-brand-text-primary/5 focus:border-brand-accent/20 outline-none text-xs font-mono text-brand-text-primary"
                         required
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="py-3 px-4 rounded-xl bg-brand-btn-accent hover:bg-brand-accent text-brand-primary text-xs font-bold transition-all"
+                      className="py-3 px-4 rounded-xl bg-brand-btn-accent hover:bg-brand-accent text-brand-primary text-xs font-bold transition-all duration-200 ease-out"
                     >
                       SET ALERT
                     </button>
@@ -470,7 +470,7 @@ const MainAppContent: React.FC = () => {
 
               {/* Analyst Ratings panel */}
               {recommendations && (
-                <div className="bg-brand-card/20 border border-white/5 rounded-3xl p-5 mb-6">
+                <div className="bg-brand-card/20 border border-brand-text-primary/5 rounded-2xl p-5 mb-6">
                   <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase mb-4 flex items-center gap-1.5">
                     <TrendingUp className="w-4 h-4 text-brand-accent" />
                     Analyst Recommendations Consensus
@@ -478,16 +478,16 @@ const MainAppContent: React.FC = () => {
 
                   {/* Recommendation Bar Chart gauge representation */}
                   <div className="space-y-3">
-                    <div className="flex h-5 rounded-lg overflow-hidden border border-white/5">
-                      <div className="bg-emerald-500 flex items-center justify-center text-[9px] font-bold text-white" style={{ width: `${(recommendations.strongBuy / 40) * 100}%` }}>
+                    <div className="flex h-5 rounded-lg overflow-hidden border border-brand-text-primary/5">
+                      <div className="bg-emerald-500 flex items-center justify-center text-[9px] font-bold text-brand-text-primary" style={{ width: `${(recommendations.strongBuy / 40) * 100}%` }}>
                         {recommendations.strongBuy > 0 && "Buy"}
                       </div>
-                      <div className="bg-emerald-400 flex items-center justify-center text-[9px] font-bold text-white" style={{ width: `${(recommendations.buy / 40) * 100}%` }}>
+                      <div className="bg-emerald-400 flex items-center justify-center text-[9px] font-bold text-brand-text-primary" style={{ width: `${(recommendations.buy / 40) * 100}%` }}>
                       </div>
-                      <div className="bg-amber-400 flex items-center justify-center text-[9px] font-bold text-white" style={{ width: `${(recommendations.hold / 40) * 100}%` }}>
+                      <div className="bg-amber-400 flex items-center justify-center text-[9px] font-bold text-brand-text-primary" style={{ width: `${(recommendations.hold / 40) * 100}%` }}>
                         {recommendations.hold > 0 && "Hold"}
                       </div>
-                      <div className="bg-red-500 flex items-center justify-center text-[9px] font-bold text-white" style={{ width: `${(recommendations.sell / 40) * 100}%` }}>
+                      <div className="bg-red-500 flex items-center justify-center text-[9px] font-bold text-brand-text-primary" style={{ width: `${(recommendations.sell / 40) * 100}%` }}>
                         {recommendations.sell > 0 && "Sell"}
                       </div>
                     </div>
@@ -504,26 +504,26 @@ const MainAppContent: React.FC = () => {
               {/* Corporate Profiles descriptions */}
               {companyProfile && (
                 <div className="space-y-4">
-                  <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase border-b border-white/5 pb-2">
+                  <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase border-b border-brand-text-primary/5 pb-2">
                     Company Profile
                   </h3>
 
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div className="flex items-center gap-2 text-brand-text-secondary">
                       <Landmark className="w-4 h-4 text-brand-accent" />
-                      <span>Industry: <strong className="text-white font-medium">{companyProfile.industry}</strong></span>
+                      <span>Industry: <strong className="text-brand-text-primary font-medium">{companyProfile.industry}</strong></span>
                     </div>
                     <div className="flex items-center gap-2 text-brand-text-secondary">
                       <Building className="w-4 h-4 text-brand-accent" />
-                      <span>CEO: <strong className="text-white font-medium">{companyProfile.ceo}</strong></span>
+                      <span>CEO: <strong className="text-brand-text-primary font-medium">{companyProfile.ceo}</strong></span>
                     </div>
                     <div className="flex items-center gap-2 text-brand-text-secondary">
                       <MapPin className="w-4 h-4 text-brand-accent" />
-                      <span>Headquarters: <strong className="text-white font-medium">{companyProfile.headquarters}</strong></span>
+                      <span>Headquarters: <strong className="text-brand-text-primary font-medium">{companyProfile.headquarters}</strong></span>
                     </div>
                     <div className="flex items-center gap-2 text-brand-text-secondary">
                       <Globe className="w-4 h-4 text-brand-accent" />
-                      <a href={companyProfile.weburl} target="_blank" rel="noreferrer" className="text-white hover:text-brand-accent flex items-center gap-1 font-medium hover:underline">
+                      <a href={companyProfile.weburl} target="_blank" rel="noreferrer" className="text-brand-text-primary hover:text-brand-accent flex items-center gap-1 font-medium hover:underline">
                         Visit Website
                         <ExternalLink className="w-3 h-3" />
                       </a>
@@ -548,7 +548,7 @@ const MainAppContent: React.FC = () => {
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             />
 
-            <div className="relative w-full max-w-xl mx-auto bg-brand-secondary border-t border-white/10 rounded-t-[32px] p-6 max-h-[85vh] overflow-y-auto z-10 shadow-2xl pb-16"
+            <div className="relative w-full max-w-xl mx-auto bg-brand-secondary border-t border-brand-text-primary/5 rounded-t-[32px] p-6 max-h-[85vh] overflow-y-auto z-10 shadow-lg shadow-black/5 shadow-black/10 pb-16"
               id="news-sheet"
             >
               <div className="w-12 h-1 bg-white/10 rounded-full mx-auto mb-6" />
@@ -560,7 +560,7 @@ const MainAppContent: React.FC = () => {
                 </span>
                 <button
                   onClick={() => setSelectedNews(null)}
-                  className="p-3 rounded-2xl bg-white/5 border border-white/5 text-brand-text-secondary"
+                  className="p-3 rounded-2xl bg-brand-text-primary/5 border border-brand-text-primary/5 text-brand-text-secondary"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -572,16 +572,16 @@ const MainAppContent: React.FC = () => {
               </div>
 
               {/* Headings */}
-              <h1 className="text-lg font-bold text-white mb-2 leading-snug">{selectedNews.headline}</h1>
+              <h1 className="text-lg font-bold text-brand-text-primary mb-2 leading-snug">{selectedNews.headline}</h1>
               
-              <div className="flex items-center gap-3 text-[10px] text-brand-text-secondary font-mono mb-6 pb-4 border-b border-white/5">
+              <div className="flex items-center gap-3 text-[10px] text-brand-text-secondary font-mono mb-6 pb-4 border-b border-brand-text-primary/5">
                 <span>{selectedNews.source}</span>
                 <span>•</span>
                 <span>{selectedNews.readTime || "3m read"}</span>
               </div>
 
               {/* Gemini AI Summary Segment */}
-              <div className="bg-brand-card border border-brand-accent/20 rounded-3xl p-5 mb-6 relative overflow-hidden">
+              <div className="bg-brand-card border border-brand-accent/20 rounded-2xl p-5 mb-6 relative overflow-hidden">
                 <h3 className="text-xs font-mono font-bold text-brand-accent uppercase mb-3 flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 animate-pulse" />
                   FinScope AI Intelligence briefing
@@ -589,9 +589,9 @@ const MainAppContent: React.FC = () => {
 
                 {loadingNewsSummary ? (
                   <div className="py-4 flex flex-col gap-2">
-                    <div className="h-3 w-4/5 bg-white/5 rounded animate-pulse" />
-                    <div className="h-3 w-11/12 bg-white/5 rounded animate-pulse" />
-                    <div className="h-3 w-3/4 bg-white/5 rounded animate-pulse" />
+                    <div className="h-3 w-4/5 bg-brand-text-primary/5 rounded animate-pulse" />
+                    <div className="h-3 w-11/12 bg-brand-text-primary/5 rounded animate-pulse" />
+                    <div className="h-3 w-3/4 bg-brand-text-primary/5 rounded animate-pulse" />
                   </div>
                 ) : (
                   <p className="text-xs text-brand-text-secondary leading-relaxed">

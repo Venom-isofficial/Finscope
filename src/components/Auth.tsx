@@ -91,7 +91,7 @@ export const Auth: React.FC = () => {
           </svg>
         </div>
         
-        <h1 className="font-display text-3xl font-bold tracking-tight text-white mb-1" id="auth-brand-name">
+        <h1 className="font-display text-3xl font-bold tracking-tight text-brand-text-primary mb-1" id="auth-brand-name">
           FinScope
         </h1>
         <p className="text-xs text-brand-text-secondary tracking-wide" id="auth-brand-tagline">
@@ -100,7 +100,7 @@ export const Auth: React.FC = () => {
       </div>
 
       {/* Main Authentic Card Layout */}
-      <div className="w-full max-w-md bg-brand-secondary/70 backdrop-blur-md rounded-3xl border border-white/5 shadow-2xl p-6 relative z-10 glass-panel"
+      <div className="w-full max-w-md bg-brand-secondary/70 backdrop-blur-md rounded-2xl border border-brand-text-primary/5 shadow-lg shadow-black/5 shadow-black/10 p-6 relative z-10 glass-panel"
         id="auth-card"
       >
         
@@ -108,7 +108,7 @@ export const Auth: React.FC = () => {
           {view === "login" && (
             <div
               key="login" >
-              <h2 className="text-xl font-bold text-white mb-2" id="login-title">Sign In</h2>
+              <h2 className="text-xl font-bold text-brand-text-primary mb-2" id="login-title">Sign In</h2>
               <p className="text-xs text-brand-text-secondary mb-6">Enter your registered email to explore deep market insights.</p>
               
               {error && <div className="mb-4 text-xs font-semibold bg-red-500/10 text-red-400 p-3 rounded-xl border border-red-500/20">{error}</div>}
@@ -121,7 +121,7 @@ export const Auth: React.FC = () => {
                     placeholder="Email Address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all placeholder:text-brand-text-secondary/50"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all placeholder:text-brand-text-secondary/50"
                     required
                   />
                 </div>
@@ -133,7 +133,7 @@ export const Auth: React.FC = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all placeholder:text-brand-text-secondary/50"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all placeholder:text-brand-text-secondary/50"
                     required
                   />
                 </div>
@@ -142,7 +142,7 @@ export const Auth: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => { setView("forgot"); setError(""); }}
-                    className="text-xs text-brand-accent hover:text-brand-accent-highlight font-medium transition-colors"
+                    className="text-xs text-brand-accent hover:text-brand-accent-highlight font-medium transition-colors duration-200 ease-out"
                   >
                     Forgot Password?
                   </button>
@@ -159,7 +159,7 @@ export const Auth: React.FC = () => {
               </form>
 
               <div className="relative my-6 text-center">
-                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-brand-text-primary/5"></div></div>
                 <span className="relative bg-brand-secondary/90 px-3 text-[10px] font-mono uppercase text-brand-text-secondary tracking-wider">OR SIGN IN WITH</span>
               </div>
 
@@ -167,7 +167,7 @@ export const Auth: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <button
                   onClick={() => { setError(""); loginWithGoogle(); }}
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-brand-card/40 border border-white/5 hover:bg-brand-card/60 transition-colors text-white text-xs font-semibold"
+                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 hover:bg-brand-card/60 transition-colors text-brand-text-primary text-xs font-semibold"
                 >
                   {/* Google SVG */}
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -177,7 +177,7 @@ export const Auth: React.FC = () => {
                 </button>
                 <button
                   onClick={() => { setError(""); loginWithApple(); }}
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-brand-card/40 border border-white/5 hover:bg-brand-card/60 transition-colors text-white text-xs font-semibold"
+                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 hover:bg-brand-card/60 transition-colors text-brand-text-primary text-xs font-semibold"
                 >
                   {/* Apple SVG */}
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -189,7 +189,7 @@ export const Auth: React.FC = () => {
 
               <button
                 onClick={() => { setError(""); enterGuestMode(); }}
-                className="w-full py-3.5 mb-6 rounded-2xl bg-white/5 hover:bg-white/10 text-white text-xs font-semibold tracking-wide border border-white/5 transition-all"
+                className="w-full py-3.5 mb-6 rounded-2xl bg-brand-text-primary/5 hover:bg-white/10 text-brand-text-primary text-xs font-semibold tracking-wide border border-brand-text-primary/5 transition-all duration-200 ease-out"
               >
                 ACCESS AS GUEST
               </button>
@@ -211,10 +211,10 @@ export const Auth: React.FC = () => {
             <div
               key="register" >
               <div className="flex items-center gap-2 mb-2">
-                <button onClick={() => setView("login")} className="text-brand-text-secondary hover:text-white transition-colors">
+                <button onClick={() => setView("login")} className="text-brand-text-secondary hover:text-brand-text-primary transition-colors duration-200 ease-out">
                   <ArrowLeft className="w-4 h-4" />
                 </button>
-                <h2 className="text-xl font-bold text-white">Create Account</h2>
+                <h2 className="text-xl font-bold text-brand-text-primary">Create Account</h2>
               </div>
               <p className="text-xs text-brand-text-secondary mb-6">Build your personal financial information vault.</p>
 
@@ -228,7 +228,7 @@ export const Auth: React.FC = () => {
                     placeholder="Full Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all duration-200 ease-out"
                     required
                   />
                 </div>
@@ -240,7 +240,7 @@ export const Auth: React.FC = () => {
                     placeholder="Email Address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all duration-200 ease-out"
                     required
                   />
                 </div>
@@ -252,7 +252,7 @@ export const Auth: React.FC = () => {
                     placeholder="Country"
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all duration-200 ease-out"
                     required
                   />
                 </div>
@@ -264,7 +264,7 @@ export const Auth: React.FC = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all duration-200 ease-out"
                     required
                   />
                 </div>
@@ -276,7 +276,7 @@ export const Auth: React.FC = () => {
                     placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all duration-200 ease-out"
                     required
                   />
                 </div>
@@ -307,20 +307,20 @@ export const Auth: React.FC = () => {
             <div
               key="forgot" >
               <div className="flex items-center gap-2 mb-2">
-                <button onClick={() => { setView("login"); setError(""); setResetSuccess(false); }} className="text-brand-text-secondary hover:text-white transition-colors">
+                <button onClick={() => { setView("login"); setError(""); setResetSuccess(false); }} className="text-brand-text-secondary hover:text-brand-text-primary transition-colors duration-200 ease-out">
                   <ArrowLeft className="w-4 h-4" />
                 </button>
-                <h2 className="text-xl font-bold text-white">Reset Password</h2>
+                <h2 className="text-xl font-bold text-brand-text-primary">Reset Password</h2>
               </div>
               <p className="text-xs text-brand-text-secondary mb-6">Enter your email and we'll dispatch a secure recovery token.</p>
 
               {error && <div className="mb-4 text-xs font-semibold bg-red-500/10 text-red-400 p-3 rounded-xl border border-red-500/20">{error}</div>}
 
               {resetSuccess ? (
-                <div className="text-center py-6 bg-brand-card/20 rounded-3xl border border-brand-accent/10 p-4"
+                <div className="text-center py-6 bg-brand-card/20 rounded-2xl border border-brand-accent/10 p-4"
                 >
                   <CheckCircle className="w-12 h-12 text-brand-accent mx-auto mb-4" />
-                  <h3 className="text-sm font-bold text-white mb-2">Link Dispatched</h3>
+                  <h3 className="text-sm font-bold text-brand-text-primary mb-2">Link Dispatched</h3>
                   <p className="text-xs text-brand-text-secondary leading-relaxed">
                     Check your email inbox for resetting guidelines. Secure session terminated.
                   </p>
@@ -340,7 +340,7 @@ export const Auth: React.FC = () => {
                       placeholder="Email Address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-white/5 focus:border-brand-accent/40 outline-none text-white text-sm transition-all"
+                      className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-brand-card/40 border border-brand-text-primary/5 focus:border-brand-accent/40 outline-none text-brand-text-primary text-sm transition-all duration-200 ease-out"
                       required
                     />
                   </div>
@@ -361,11 +361,11 @@ export const Auth: React.FC = () => {
 
       {/* Footer Details */}
       <div className="text-center mt-10 relative z-10 text-[10px] text-brand-text-secondary/60 flex items-center gap-3">
-        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" className="hover:text-brand-text-primary transition-colors duration-200 ease-out">Privacy Policy</a>
         <span>•</span>
-        <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+        <a href="#" className="hover:text-brand-text-primary transition-colors duration-200 ease-out">Terms of Service</a>
         <span>•</span>
-        <a href="#" className="hover:text-white transition-colors">Enforce SSL</a>
+        <a href="#" className="hover:text-brand-text-primary transition-colors duration-200 ease-out">Enforce SSL</a>
       </div>
     </div>
   );

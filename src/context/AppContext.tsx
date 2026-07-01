@@ -309,11 +309,35 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           if (items.length > 0) {
             setChatHistory(items);
             localStorage.setItem("finscope_chat", JSON.stringify(items));
+          } else {
+            // Initialize with welcome message if empty
+            const initialMsg: ChatMessage = {
+              id: "c_1",
+              userId: firebaseUser.uid,
+              sender: "ai",
+              message: "Hello! I am your FinScope AI financial assistant. Ask me anything about today's market trend, individual stocks, cryptocurrency technicals, or ETF allocations.",
+              timestamp: new Date().toISOString()
+            };
+            setDoc(doc(db, "users", firebaseUser.uid, "chatHistory", "c_1"), initialMsg).catch(console.error);
+            setChatHistory([initialMsg]);
+            localStorage.setItem("finscope_chat", JSON.stringify([initialMsg]));
           }
         }, (error) => {
           console.warn("Firestore chatHistory listener permission denied, using local storage");
           const localChat = localStorage.getItem("finscope_chat");
-          if (localChat) setChatHistory(JSON.parse(localChat));
+          if (localChat) {
+            setChatHistory(JSON.parse(localChat));
+          } else {
+            const initialMsg: ChatMessage = {
+              id: "c_1",
+              userId: firebaseUser.uid,
+              sender: "ai",
+              message: "Hello! I am your FinScope AI financial assistant. Ask me anything about today's market trend, individual stocks, cryptocurrency technicals, or ETF allocations.",
+              timestamp: new Date().toISOString()
+            };
+            setChatHistory([initialMsg]);
+            localStorage.setItem("finscope_chat", JSON.stringify([initialMsg]));
+          }
         });
 
         setLoading(false);

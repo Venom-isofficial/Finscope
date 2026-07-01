@@ -29,25 +29,25 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               <span className="text-[10px] uppercase tracking-widest font-mono text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded-full">ECONOMY</span>
               <span className="text-[9px] text-brand-text-secondary">4m ago</span>
             </div>
-            <h4 className="text-xs font-semibold text-white line-clamp-2">Fed Signals Rate Cuts After Key CPI Inflation Check</h4>
+            <h4 className="text-xs font-semibold text-brand-text-primary line-clamp-2">Fed Signals Rate Cuts After Key CPI Inflation Check</h4>
           </div>
 
-          <div className="absolute top-24 right-4 w-48 p-4 rounded-2xl bg-brand-card/90 border border-white/5 shadow-xl"
+          <div className="absolute top-24 right-4 w-48 p-4 rounded-2xl bg-brand-card/90 border border-brand-text-primary/5 shadow-lg shadow-black/5"
           >
             <div className="flex items-center gap-2 mb-2">
               <span className="text-[10px] uppercase tracking-widest font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full">TECH</span>
               <span className="text-[9px] text-brand-text-secondary">15m ago</span>
             </div>
-            <h4 className="text-xs font-semibold text-white line-clamp-2">Blackwell GPU Demand Reaches Multi-Year Peak</h4>
+            <h4 className="text-xs font-semibold text-brand-text-primary line-clamp-2">Blackwell GPU Demand Reaches Multi-Year Peak</h4>
           </div>
 
-          <div className="absolute bottom-4 left-1/4 w-56 p-4 rounded-2xl glass-panel border border-brand-accent/20 shadow-2xl"
+          <div className="absolute bottom-4 left-1/4 w-56 p-4 rounded-2xl glass-panel border border-brand-accent/20 shadow-lg shadow-black/5 shadow-black/10"
           >
             <div className="flex items-center justify-between mb-2">
               <span className="text-[9px] text-brand-text-secondary">MARKETS SUMMARY</span>
               <FileText className="w-3 h-3 text-brand-accent" />
             </div>
-            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden mb-1">
+            <div className="h-1.5 w-full bg-brand-text-primary/5 rounded-full overflow-hidden mb-1">
               <div className="h-full w-4/5 bg-brand-accent" />
             </div>
             <p className="text-[10px] text-brand-text-secondary">AI brief summary generated successfully.</p>
@@ -63,27 +63,27 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         <div className="relative w-full h-64 flex items-center justify-center">
 
           {/* Interactive Chart & List Overlay */}
-          <div className="absolute left-4 top-8 w-52 p-4 rounded-2xl bg-brand-card/90 border border-white/5 shadow-xl"
+          <div className="absolute left-4 top-8 w-52 p-4 rounded-2xl bg-brand-card/90 border border-brand-text-primary/5 shadow-lg shadow-black/5"
           >
             <span className="text-[9px] font-mono text-brand-text-secondary">ASSETS LIVE</span>
             <div className="space-y-3 mt-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold font-mono bg-white/5 px-2 py-0.5 rounded text-white">AAPL</span>
+                  <span className="text-xs font-bold font-mono bg-brand-text-primary/5 px-2 py-0.5 rounded text-brand-text-primary">AAPL</span>
                   <span className="text-[10px] text-brand-text-secondary">Stock</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-bold font-mono text-white">$182.52</p>
+                  <p className="text-xs font-bold font-mono text-brand-text-primary">$182.52</p>
                   <p className="text-[9px] font-mono text-emerald-400">+1.94%</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between border-t border-white/5 pt-2">
+              <div className="flex items-center justify-between border-t border-brand-text-primary/5 pt-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold font-mono bg-brand-accent/10 px-2 py-0.5 rounded text-brand-accent">BTC</span>
                   <span className="text-[10px] text-brand-text-secondary">Crypto</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-bold font-mono text-white">$67.4K</p>
+                  <p className="text-xs font-bold font-mono text-brand-text-primary">$67.4K</p>
                   <p className="text-[9px] font-mono text-emerald-400">+2.15%</p>
                 </div>
               </div>
@@ -91,10 +91,10 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
           </div>
 
           {/* Mini Graph card */}
-          <div className="absolute right-4 bottom-8 w-44 p-4 rounded-2xl glass-panel border border-brand-accent/20 shadow-2xl"
+          <div className="absolute right-4 bottom-8 w-44 p-4 rounded-2xl glass-panel border border-brand-accent/20 shadow-lg shadow-black/5 shadow-black/10"
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold font-mono text-white">QQQ ETF</span>
+              <span className="text-xs font-bold font-mono text-brand-text-primary">QQQ ETF</span>
               <TrendingUp className="w-4 h-4 text-emerald-400" />
             </div>
             {/* Mock Chart Vector */}
@@ -124,21 +124,21 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         <div className="relative w-full h-64 flex items-center justify-center">
 
           {/* AI Advisor Chat simulation */}
-          <div className="w-72 p-4 rounded-3xl bg-brand-card border border-brand-accent/30 shadow-2xl"
+          <div className="w-72 p-4 rounded-2xl bg-brand-card border border-brand-accent/30 shadow-lg shadow-black/5 shadow-black/10"
           >
-            <div className="flex items-center gap-2 border-b border-white/5 pb-2 mb-3">
+            <div className="flex items-center gap-2 border-b border-brand-text-primary/5 pb-2 mb-3">
               <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center">
                 <Cpu className="w-3.5 h-3.5 text-brand-accent" />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-white">FinScope AI Advisor</h4>
+                <h4 className="text-xs font-bold text-brand-text-primary">FinScope AI Advisor</h4>
                 <p className="text-[8px] text-emerald-400">● Analytical Intelligence Active</p>
               </div>
             </div>
 
             <div className="space-y-3">
               <div className="text-right">
-                <span className="inline-block bg-brand-secondary text-white text-[10px] px-3 py-1.5 rounded-2xl rounded-tr-none border border-white/5">
+                <span className="inline-block bg-brand-secondary text-brand-text-primary text-[10px] px-3 py-1.5 rounded-2xl rounded-tr-none border border-brand-text-primary/5">
                   Compare Apple vs Microsoft
                 </span>
               </div>
@@ -173,7 +173,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         {currentPage < pages.length - 1 && (
           <button
             onClick={onComplete}
-            className="text-xs tracking-wider text-brand-text-secondary hover:text-white transition-colors"
+            className="text-xs tracking-wider text-brand-text-secondary hover:text-brand-text-primary transition-colors duration-200 ease-out"
             id="onboarding-skip-btn"
           >
             SKIP
@@ -193,7 +193,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             </div>
 
             {/* Typography */}
-            <h2 className="font-display text-3xl font-bold tracking-tight text-white mb-3" id="onboarding-page-title">
+            <h2 className="font-display text-3xl font-bold tracking-tight text-brand-text-primary mb-3" id="onboarding-page-title">
               {pages[currentPage].title}
             </h2>
             <p className="text-sm text-brand-text-secondary font-light leading-relaxed px-4" id="onboarding-page-subtitle">

@@ -41,6 +41,14 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background-color: rgba(182, 255, 90, 0.2); /* brand-accent with opacity */
+  color: var(--text-primary);
 }
 
 /* Custom scrollbar for premium aesthetic */

@@ -103,7 +103,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
           <div>
             <span className="text-[10px] font-mono tracking-widest text-brand-text-secondary uppercase font-semibold block mb-0.5">PORTFOLIO INTELLIGENCE</span>
-            <h1 className="font-display text-lg font-black text-white tracking-tight leading-tight" id="home-greeting">
+            <h1 className="font-display text-2xl font-bold text-brand-text-primary tracking-tight leading-tight" id="home-greeting">
               Good Morning, <span className="text-brand-accent">{user?.name || "Investor"}</span>
             </h1>
           </div>
@@ -112,7 +112,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           {/* Search Trigger */}
           <button
             onClick={onSearchOpen}
-            className="p-3.5 rounded-[18px] bg-brand-card border border-white/10 text-brand-text-secondary hover:text-white hover:border-brand-accent/50 transition-all active:scale-95 shadow-lg"
+            className="p-3.5 rounded-[18px] bg-brand-card border border-brand-text-primary/5 text-brand-text-secondary hover:text-brand-text-primary hover:border-brand-accent/50 transition-all active:scale-95 shadow-lg"
             id="home-search-btn"
           >
             <Search className="w-4 h-4" />
@@ -121,7 +121,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           {/* Notifications bell */}
           <button
             onClick={onNotificationsOpen}
-            className="p-3.5 rounded-[18px] bg-brand-card border border-white/10 text-brand-text-secondary hover:text-white hover:border-brand-accent/50 transition-all active:scale-95 relative shadow-lg"
+            className="p-3.5 rounded-[18px] bg-brand-card border border-brand-text-primary/5 text-brand-text-secondary hover:text-brand-text-primary hover:border-brand-accent/50 transition-all active:scale-95 relative shadow-lg"
             id="home-bell-btn"
           >
             <Bell className="w-4 h-4" />
@@ -134,7 +134,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* 2. Hero Card holding market index scroll banner */}
       <div className="px-4 mb-8">
-        <div className="bg-gradient-to-br from-brand-card/90 to-brand-secondary/90 backdrop-blur-sm rounded-[24px] p-6 border border-white/10 relative overflow-hidden shadow-2xl">
+        <div className="bg-gradient-to-br from-brand-card/90 to-brand-secondary/90 backdrop-blur-sm rounded-2xl p-6 border border-brand-text-primary/5 relative overflow-hidden shadow-lg shadow-black/5 shadow-black/10">
           {/* Ambient vector detail graph from Immersive UI design */}
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-15 pointer-events-none">
             <svg viewBox="0 0 400 200" className="w-full h-full text-brand-accent" preserveAspectRatio="none">
@@ -147,7 +147,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
               GLOBAL INDICES TIMELINE
             </span>
-            <button onClick={loadHomeData} className="text-brand-text-secondary hover:text-white transition-colors p-1 bg-white/5 rounded-lg border border-white/5">
+            <button onClick={loadHomeData} className="text-brand-text-secondary hover:text-brand-text-primary transition-colors p-1 bg-brand-text-primary/5 rounded-lg border border-brand-text-primary/5">
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -155,7 +155,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           {loading ? (
             <div className="flex gap-4 overflow-x-auto pb-2">
               {[1, 2, 3].map(i => (
-                <div key={i} className="min-w-[140px] h-20 bg-white/5 animate-pulse rounded-2xl" />
+                <div key={i} className="min-w-[140px] h-20 bg-brand-text-primary/5 animate-pulse rounded-2xl" />
               ))}
             </div>
           ) : (
@@ -165,11 +165,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 return (
                   <div
                     key={idx.symbol}
-                    className="min-w-[155px] flex-1 p-4 rounded-[18px] bg-brand-primary/50 backdrop-blur-sm border border-white/10 hover:border-brand-accent/30 transition-all cursor-pointer shadow-sm"
+                    className="min-w-[155px] flex-1 p-4 rounded-[18px] bg-brand-primary/50 backdrop-blur-sm border border-brand-text-primary/5 hover:border-brand-accent/30 transition-all cursor-pointer shadow-sm"
                     onClick={() => onSelectAsset(idx.symbol, idx.symbol.includes("BTC") ? "crypto" : "stock")}
                   >
                     <p className="text-[11px] text-brand-text-secondary font-bold uppercase tracking-wider">{idx.name}</p>
-                    <p className="text-base font-black font-mono mt-1.5 text-white">${idx.price.toLocaleString()}</p>
+                    <p className="text-base font-bold font-mono mt-1.5 text-brand-text-primary">${idx.price.toLocaleString()}</p>
                     <div className="flex items-center gap-1 mt-1 text-[10px] font-mono">
                       {positive ? <ArrowUpRight className="w-3 h-3 text-brand-chart-green" /> : <ArrowDownRight className="w-3 h-3 text-brand-chart-red" />}
                       <span className={positive ? "text-brand-chart-green font-bold" : "text-brand-chart-red font-bold"}>
@@ -205,13 +205,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <button
                 key={act.label}
                 onClick={() => onNavigateTab(act.tab)}
-                className="flex flex-col items-center justify-center p-4 rounded-[18px] bg-brand-card/70 border border-white/10 hover:border-brand-accent/40 hover:bg-brand-card/90 shadow-lg transition-all active:scale-95 group"
+                className="flex flex-col items-center justify-center p-4 rounded-[18px] bg-brand-card/70 border border-brand-text-primary/5 hover:border-brand-accent/40 hover:bg-brand-card/90 shadow-lg transition-all active:scale-95 group"
                 id={`btn-action-${act.label.toLowerCase().replace(" ", "-")}`}
               >
-                <div className="p-3 rounded-xl bg-white/5 mb-2 group-hover:bg-brand-accent/10 group-hover:text-brand-accent transition-colors border border-white/5 group-hover:border-brand-accent/20">
-                  <Icon className="w-4 h-4 text-brand-text-secondary group-hover:text-brand-accent transition-colors" />
+                <div className="p-3 rounded-xl bg-brand-text-primary/5 mb-2 group-hover:bg-brand-accent/10 group-hover:text-brand-accent transition-colors border border-brand-text-primary/5 group-hover:border-brand-accent/20">
+                  <Icon className="w-4 h-4 text-brand-text-secondary group-hover:text-brand-accent transition-colors duration-200 ease-out" />
                 </div>
-                <span className="text-[10px] text-brand-text-secondary font-black uppercase tracking-wider group-hover:text-white transition-colors">{act.label}</span>
+                <span className="text-[10px] text-brand-text-secondary font-bold uppercase tracking-wider group-hover:text-brand-text-primary transition-colors duration-200 ease-out">{act.label}</span>
               </button>
             );
           })}
@@ -221,11 +221,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 4. Watchlist Snapshot Preview */}
       <div className="px-4 mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
+          <h2 className="text-sm font-display font-bold uppercase tracking-widest text-brand-text-primary flex items-center gap-1.5">
             <Compass className="w-4 h-4 text-brand-accent" />
             Your Watchlist Snapshot
           </h2>
-          <button onClick={() => onNavigateTab("markets")} className="text-xs text-brand-accent font-bold hover:underline transition-all">
+          <button onClick={() => onNavigateTab("markets")} className="text-xs text-brand-accent font-bold hover:underline transition-all duration-200 ease-out">
             View All
           </button>
         </div>
@@ -241,19 +241,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <div
                   key={item.id}
                   onClick={() => onSelectAsset(item.symbol, item.type)}
-                  className="flex items-center justify-between p-4 rounded-[18px] bg-gradient-to-r from-brand-card/80 to-brand-secondary/80 border border-white/10 hover:border-brand-accent/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
+                  className="flex items-center justify-between p-4 rounded-[18px] bg-gradient-to-r from-brand-card/80 to-brand-secondary/80 border border-brand-text-primary/5 hover:border-brand-accent/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-black font-mono bg-brand-accent/15 border border-brand-accent/20 text-brand-accent px-2.5 py-1 rounded-[8px]">
+                    <span className="text-xs font-bold font-mono bg-brand-accent/15 border border-brand-accent/20 text-brand-accent px-2.5 py-1 rounded-[8px]">
                       {item.symbol}
                     </span>
                     <div>
-                      <p className="text-xs text-white font-bold leading-none">{item.name}</p>
+                      <p className="text-xs text-brand-text-primary font-bold leading-none">{item.name}</p>
                       <p className="text-[10px] text-brand-text-secondary uppercase font-mono tracking-wider mt-1">{item.type}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-black font-mono text-white">${price.toFixed(2)}</p>
+                    <p className="text-xs font-bold font-mono text-brand-text-primary">${price.toFixed(2)}</p>
                     <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${isPos ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
                       {isPos ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                       {isPos ? "+" : ""}{change.toFixed(2)}%
@@ -264,7 +264,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             })}
           </div>
         ) : (
-          <div className="text-center py-8 bg-brand-card/30 rounded-[24px] border border-dashed border-white/15">
+          <div className="text-center py-8 bg-brand-card/30 rounded-2xl border border-dashed border-brand-text-primary/15">
             <p className="text-xs text-brand-text-secondary">No items in your watchlist.</p>
             <button onClick={onSearchOpen} className="text-xs text-brand-accent font-bold mt-2 hover:underline">
               Search Tickers to Add
@@ -275,7 +275,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* 5. Trending News Feed with instant AI summary */}
       <div className="px-4 mb-8">
-        <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white mb-4 flex items-center gap-1.5">
+        <h2 className="text-sm font-display font-bold uppercase tracking-widest text-brand-text-primary mb-4 flex items-center gap-1.5">
           <Bookmark className="w-4 h-4 text-brand-accent" />
           TRENDING NEWS BRIEFS
         </h2>
@@ -283,7 +283,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         {loading ? (
           <div className="space-y-4">
             {[1, 2].map(i => (
-              <div key={i} className="h-28 bg-white/5 animate-pulse rounded-2xl" />
+              <div key={i} className="h-28 bg-brand-text-primary/5 animate-pulse rounded-2xl" />
             ))}
           </div>
         ) : (
@@ -292,13 +292,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div
                 key={item.id}
                 onClick={() => onShowNewsDetails(item)}
-                className="bg-gradient-to-br from-brand-card/90 to-brand-secondary/90 backdrop-blur-sm border border-white/10 rounded-[24px] overflow-hidden hover:border-brand-accent/40 hover:shadow-2xl transition-all cursor-pointer group shadow-xl"
+                className="bg-gradient-to-br from-brand-card/90 to-brand-secondary/90 backdrop-blur-sm border border-brand-text-primary/5 rounded-2xl overflow-hidden hover:border-brand-accent/40 hover:shadow-lg shadow-black/5 shadow-black/10 transition-all cursor-pointer group shadow-lg shadow-black/5"
               >
                 {/* News Thumbnail Card with absolute styling */}
                 <div className="relative h-44 overflow-hidden">
                   <img src={item.image} alt={item.headline} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/20 to-transparent" />
-                  <span className="absolute top-4 left-4 bg-brand-accent text-brand-primary text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-[8px] shadow-lg">
+                  <span className="absolute top-4 left-4 bg-brand-accent text-brand-primary text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-[8px] shadow-lg">
                     {item.category}
                   </span>
                 </div>
@@ -308,7 +308,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <span>{item.source}</span>
                     <span>{item.readTime || "3m read"}</span>
                   </div>
-                  <h3 className="text-sm font-bold text-white leading-snug group-hover:text-brand-accent transition-colors line-clamp-2">
+                  <h3 className="text-sm font-bold text-brand-text-primary leading-snug group-hover:text-brand-accent transition-colors line-clamp-2">
                     {item.headline}
                   </h3>
 
@@ -316,7 +316,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   {activeSummary && activeSummary.id === item.id && (
                     <div className="mt-4 p-4 bg-brand-primary/80 rounded-[18px] border border-brand-accent/20 text-xs text-brand-text-secondary leading-relaxed shadow-inner"
                     >
-                      <div className="flex items-center gap-1.5 text-[10px] text-brand-accent font-black uppercase mb-1.5 font-mono tracking-wider">
+                      <div className="flex items-center gap-1.5 text-[10px] text-brand-accent font-bold uppercase mb-1.5 font-mono tracking-wider">
                         <Sparkles className="w-3.5 h-3.5 animate-pulse" />
                         FinScope AI summary
                       </div>
@@ -325,11 +325,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   )}
 
                   {/* Summarize Action Buttons */}
-                  <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between mt-5 pt-4 border-t border-brand-text-primary/5">
                     <button
                       onClick={(e) => handleAISummarize(e, item)}
                       disabled={summarizingId === item.id}
-                      className="flex items-center gap-1.5 text-xs text-brand-accent font-black uppercase tracking-wider hover:text-brand-accent-highlight transition-colors"
+                      className="flex items-center gap-1.5 text-xs text-brand-accent font-bold uppercase tracking-wider hover:text-brand-accent-highlight transition-colors duration-200 ease-out"
                     >
                       <Sparkles className="w-3.5 h-3.5 animate-pulse" />
                       {summarizingId === item.id ? "Analyzing..." : "AI Summarize"}
@@ -337,7 +337,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <div className="flex gap-2">
                       <button
                         onClick={(e) => handleSaveArticle(e, item)}
-                        className={`p-2 rounded-xl border border-white/10 hover:bg-brand-accent/15 hover:border-brand-accent/30 hover:text-brand-accent transition-all ${
+                        className={`p-2 rounded-xl border border-brand-text-primary/5 hover:bg-brand-accent/15 hover:border-brand-accent/30 hover:text-brand-accent transition-all ${
                           savedArticles.some(sa => sa.newsId === item.id) ? "text-brand-accent bg-brand-accent/10 border-brand-accent/30" : "text-brand-text-secondary"
                         }`}
                       >
@@ -355,17 +355,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 6. Market Movers Segment */}
       <div className="px-4 mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
+          <h2 className="text-sm font-display font-bold uppercase tracking-widest text-brand-text-primary flex items-center gap-1.5">
             <TrendingUp className="w-4 h-4 text-brand-accent" />
             Market Movers
           </h2>
-          <div className="flex bg-brand-card rounded-[14px] p-1 border border-white/10 shadow-md">
+          <div className="flex bg-brand-card rounded-[14px] p-1 border border-brand-text-primary/5 shadow-md">
             {(["gainers", "losers", "active"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setMoversTab(tab)}
-                className={`px-3 py-1 rounded-[10px] text-[10px] font-black uppercase tracking-wider transition-all ${
-                  moversTab === tab ? "bg-brand-accent text-brand-primary shadow-md" : "text-brand-text-secondary hover:text-white"
+                className={`px-3 py-1 rounded-[10px] text-[10px] font-bold uppercase tracking-wider transition-all ${
+                  moversTab === tab ? "bg-brand-accent text-brand-primary shadow-md" : "text-brand-text-secondary hover:text-brand-text-primary"
                 }`}
               >
                 {tab}
@@ -374,22 +374,22 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-brand-card/80 to-brand-secondary/80 border border-white/10 rounded-[24px] p-4 shadow-xl">
+        <div className="bg-gradient-to-br from-brand-card/80 to-brand-secondary/80 border border-brand-text-primary/5 rounded-2xl p-4 shadow-lg shadow-black/5">
           <div className="space-y-3">
             {moversTab === "gainers" && MARKET_MOVERS.gainers.map((m) => (
               <div
                 key={m.symbol}
                 onClick={() => onSelectAsset(m.symbol, "stock")}
-                className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-white/[0.04] transition-all cursor-pointer border border-transparent hover:border-white/5"
+                className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-brand-text-primary/5 transition-all cursor-pointer border border-transparent hover:border-brand-text-primary/5"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-black font-mono text-brand-accent bg-brand-accent/10 border border-brand-accent/25 px-2.5 py-1 rounded-[6px]">
+                  <span className="text-xs font-bold font-mono text-brand-accent bg-brand-accent/10 border border-brand-accent/25 px-2.5 py-1 rounded-[6px]">
                     {m.symbol}
                   </span>
-                  <span className="text-xs font-bold text-white">{m.name}</span>
+                  <span className="text-xs font-bold text-brand-text-primary">{m.name}</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-black font-mono text-white">${m.price.toFixed(2)}</p>
+                  <p className="text-xs font-bold font-mono text-brand-text-primary">${m.price.toFixed(2)}</p>
                   <p className="text-[10px] font-mono text-brand-chart-green font-extrabold">+{m.changePercent}%</p>
                 </div>
               </div>
@@ -399,16 +399,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div
                 key={m.symbol}
                 onClick={() => onSelectAsset(m.symbol, "stock")}
-                className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-white/[0.04] transition-all cursor-pointer border border-transparent hover:border-white/5"
+                className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-brand-text-primary/5 transition-all cursor-pointer border border-transparent hover:border-brand-text-primary/5"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-black font-mono text-brand-chart-red bg-brand-chart-red/10 border border-brand-chart-red/25 px-2.5 py-1 rounded-[6px]">
+                  <span className="text-xs font-bold font-mono text-brand-chart-red bg-brand-chart-red/10 border border-brand-chart-red/25 px-2.5 py-1 rounded-[6px]">
                     {m.symbol}
                   </span>
-                  <span className="text-xs font-bold text-white">{m.name}</span>
+                  <span className="text-xs font-bold text-brand-text-primary">{m.name}</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-black font-mono text-white">${m.price.toFixed(2)}</p>
+                  <p className="text-xs font-bold font-mono text-brand-text-primary">${m.price.toFixed(2)}</p>
                   <p className="text-[10px] font-mono text-brand-chart-red font-extrabold">{m.changePercent}%</p>
                 </div>
               </div>
@@ -418,16 +418,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div
                 key={m.symbol}
                 onClick={() => onSelectAsset(m.symbol, "stock")}
-                className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-white/[0.04] transition-all cursor-pointer border border-transparent hover:border-white/5"
+                className="flex items-center justify-between p-3.5 rounded-[16px] hover:bg-brand-text-primary/5 transition-all cursor-pointer border border-transparent hover:border-brand-text-primary/5"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-black font-mono text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-[6px]">
+                  <span className="text-xs font-bold font-mono text-brand-text-primary bg-brand-text-primary/5 border border-brand-text-primary/5 px-2.5 py-1 rounded-[6px]">
                     {m.symbol}
                   </span>
-                  <span className="text-xs font-bold text-white">{m.name}</span>
+                  <span className="text-xs font-bold text-brand-text-primary">{m.name}</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-black font-mono text-white">${m.price.toFixed(2)}</p>
+                  <p className="text-xs font-bold font-mono text-brand-text-primary">${m.price.toFixed(2)}</p>
                   <p className="text-[10px] font-mono text-brand-text-secondary font-bold">Vol: {m.volume}</p>
                 </div>
               </div>
@@ -438,13 +438,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* 7. Sector Heatmap cards */}
       <div className="px-4">
-        <h2 className="text-sm font-display font-bold uppercase tracking-widest text-white mb-4 flex items-center gap-1.5">
+        <h2 className="text-sm font-display font-bold uppercase tracking-widest text-brand-text-primary mb-4 flex items-center gap-1.5">
           <Compass className="w-4 h-4 text-brand-accent" />
           Market Heatmap Sectors
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {MARKET_HEATMAP.map((sec) => (
-            <div key={sec.sector} className="p-5 rounded-[24px] bg-gradient-to-br from-brand-card/80 to-brand-secondary/80 border border-white/10 flex flex-col justify-between shadow-xl">
+            <div key={sec.sector} className="p-5 rounded-2xl bg-gradient-to-br from-brand-card/80 to-brand-secondary/80 border border-brand-text-primary/5 flex flex-col justify-between shadow-lg shadow-black/5">
               <span className="text-[10px] uppercase font-mono tracking-wider text-brand-text-secondary mb-4 font-bold">{sec.sector}</span>
               <div className="flex gap-2.5">
                 {sec.companies.map((co) => {
@@ -459,8 +459,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
                           : "bg-red-500/10 border border-brand-chart-red/30 hover:border-brand-chart-red/50"
                       }`}
                     >
-                      <p className="text-xs font-black font-mono text-white">{co.symbol}</p>
-                      <p className={`text-[10px] font-mono font-black mt-1 ${positive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
+                      <p className="text-xs font-bold font-mono text-brand-text-primary">{co.symbol}</p>
+                      <p className={`text-[10px] font-mono font-bold mt-1 ${positive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
                         {positive ? "+" : ""}{co.change}%
                       </p>
                     </div>
