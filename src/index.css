@@ -15,6 +15,8 @@
   --color-brand-btn-accent: var(--btn-accent);
   --color-brand-text-primary: var(--text-primary);
   --color-brand-text-secondary: var(--text-secondary);
+  --color-brand-chart-green: var(--chart-green);
+  --color-brand-chart-red: var(--chart-red);
 }
 
 :root {

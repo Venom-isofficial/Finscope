@@ -152,15 +152,7 @@ const MainAppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden relative selection:bg-[var(--accent)] selection:text-[var(--bg-primary)] transition-colors duration-500">
-      {/* Global Animated Watery Background Layer */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[55%] h-[55%] rounded-full bg-[var(--accent)] opacity-[0.06] blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[65%] h-[65%] rounded-full bg-[var(--accent)] opacity-[0.05] blur-[140px]" />
-        <div className="absolute top-[30%] right-[15%] w-[45%] h-[45%] rounded-full bg-[var(--bg-card)] opacity-[0.14] blur-[100px]" />
-        <div className="absolute bottom-[20%] left-[10%] w-[50%] h-[50%] rounded-full bg-[var(--bg-secondary)] opacity-[0.12] blur-[110px]" />
-      </div>
-
+    <div className="min-h-screen bg-brand-primary text-brand-text-primary overflow-x-hidden relative selection:bg-brand-accent selection:text-brand-primary transition-colors duration-500">
       
         {/* FLOW 1: SPLASH */}
         {flow === "splash" && (
@@ -199,38 +191,38 @@ const MainAppContent: React.FC = () => {
             key="dashboard" className="w-full min-h-screen flex flex-col md:flex-row bg-transparent relative z-10"
           >
             {/* Desktop Left Sidebar Navigation - Hidden on mobile */}
-            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-[var(--bg-secondary)]/30 backdrop-blur-xl border-r border-white/5 p-6 h-screen sticky top-0 justify-between">
+            <div className="hidden md:flex md:w-64 lg:w-72 shrink-0 flex-col bg-brand-secondary/30 backdrop-blur-xl border-r border-white/5 p-6 h-screen sticky top-0 justify-between">
               <div className="flex flex-col">
                 {/* Logo or Brand */}
                 <div className="flex items-center gap-3 mb-8 px-2">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[var(--bg-card)] to-[var(--accent)] p-[2px] shadow-md flex items-center justify-center shrink-0">
-                    <div className="w-full h-full rounded-lg bg-[var(--bg-primary)] flex items-center justify-center font-bold text-[var(--accent)] font-display">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-card to-brand-accent p-[2px] shadow-md flex items-center justify-center shrink-0">
+                    <div className="w-full h-full rounded-lg bg-brand-primary flex items-center justify-center font-bold text-brand-accent font-display">
                       FS
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-[var(--text-primary)] font-display font-black text-sm uppercase tracking-wider leading-none">FinScope</h2>
-                    <span className="text-[8px] font-mono tracking-widest text-[var(--text-secondary)]/70 block mt-1 uppercase font-black">AI Portfolio Intel</span>
+                    <h2 className="text-brand-text-primary font-display font-black text-sm uppercase tracking-wider leading-none">FinScope</h2>
+                    <span className="text-[8px] font-mono tracking-widest text-brand-text-secondary/70 block mt-1 uppercase font-black">AI Portfolio Intel</span>
                   </div>
                 </div>
 
                 {/* User Profile Info on sidebar */}
                 {user && (
-                  <div className="p-4 rounded-2xl bg-[var(--bg-card)]/40 border border-white/5 mb-6">
+                  <div className="p-4 rounded-2xl bg-brand-card/40 border border-white/5 mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)] font-black font-display bg-[var(--bg-card)] shadow-md overflow-hidden shrink-0">
+                      <div className="w-10 h-10 rounded-full border border-brand-accent/20 flex items-center justify-center text-brand-accent font-black font-display bg-brand-card shadow-md overflow-hidden shrink-0">
                         {user.photoURL ? (
                           <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                         ) : (
-                          <span className="text-xs font-bold text-[var(--accent)] font-mono">
+                          <span className="text-xs font-bold text-brand-accent font-mono">
                             {user.name ? user.name.slice(0, 2).toUpperCase() : "IP"}
                           </span>
                         )}
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs font-black text-[var(--text-primary)] truncate">{user.name || "Investor"}</p>
-                        <p className="text-[9px] text-[var(--text-secondary)] truncate font-medium">{user.email || "guest@finscope.ai"}</p>
-                        <span className="text-[8px] font-mono font-black tracking-widest bg-[var(--accent)]/15 border border-[var(--accent)]/25 text-[var(--accent)] px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
+                        <p className="text-xs font-black text-brand-text-primary truncate">{user.name || "Investor"}</p>
+                        <p className="text-[9px] text-brand-text-secondary truncate font-medium">{user.email || "guest@finscope.ai"}</p>
+                        <span className="text-[8px] font-mono font-black tracking-widest bg-brand-accent/15 border border-brand-accent/25 text-brand-accent px-1.5 py-0.2 mt-1 inline-block rounded uppercase shadow-sm">
                           {user.membership || "Pro"}
                         </span>
                       </div>
@@ -258,11 +250,11 @@ const MainAppContent: React.FC = () => {
                         }}
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold tracking-wide transition-all ${
                           isActive
-                            ? "bg-[var(--bg-card)] text-[var(--accent)] border-l-2 border-[var(--accent)] shadow-md"
-                            : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]/20"
+                            ? "bg-brand-card text-brand-accent border-l-2 border-brand-accent shadow-md"
+                            : "text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-card/20"
                         }`}
                       >
-                        <Icon className={`w-4 h-4 ${isActive ? "text-[var(--accent)]" : "text-[var(--text-secondary)]"}`} />
+                        <Icon className={`w-4 h-4 ${isActive ? "text-brand-accent" : "text-brand-text-secondary"}`} />
                         {tab.label}
                       </button>
                     );
@@ -271,7 +263,7 @@ const MainAppContent: React.FC = () => {
               </div>
 
               {/* Sidebar bottom indicator */}
-              <div className="text-[9px] text-[var(--text-secondary)]/40 font-mono tracking-wider pt-4 border-t border-white/5">
+              <div className="text-[9px] text-brand-text-secondary/40 font-mono tracking-wider pt-4 border-t border-white/5">
                 <p>FinScope AI v1.0.0</p>
                 <p className="mt-1">© 2026 FinScope.ai</p>
               </div>
@@ -352,7 +344,7 @@ const MainAppContent: React.FC = () => {
             />
 
             {/* The Sheet */}
-            <div className="relative w-full max-w-xl mx-auto bg-[var(--bg-secondary)] border-t border-white/10 rounded-t-[32px] p-6 max-h-[90vh] overflow-y-auto z-10 shadow-2xl pb-16"
+            <div className="relative w-full max-w-xl mx-auto bg-brand-secondary border-t border-white/10 rounded-t-[32px] p-6 max-h-[90vh] overflow-y-auto z-10 shadow-2xl pb-16"
               id="details-sheet"
             >
               {/* Drag bar indicator */}
@@ -361,12 +353,12 @@ const MainAppContent: React.FC = () => {
               {/* Top Row with closer & watchlist toggle */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 bg-[var(--bg-card)] rounded-2xl border border-white/5 font-bold font-mono text-[var(--accent)] text-xs">
+                  <div className="p-3 bg-brand-card rounded-2xl border border-white/5 font-bold font-mono text-brand-accent text-xs">
                     {selectedAsset.symbol}
                   </div>
                   <div>
                     <h2 className="text-sm font-bold text-white tracking-tight">{companyProfile?.name || selectedAsset.symbol}</h2>
-                    <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-widest font-mono mt-0.5">{selectedAsset.type}</p>
+                    <p className="text-[10px] text-brand-text-secondary uppercase tracking-widest font-mono mt-0.5">{selectedAsset.type}</p>
                   </div>
                 </div>
 
@@ -375,15 +367,15 @@ const MainAppContent: React.FC = () => {
                     onClick={handleToggleWatchFromDetails}
                     className={`p-3 rounded-2xl border transition-all ${
                       isWatch
-                        ? "bg-[var(--accent)]/10 border-[var(--accent)]/20 text-[var(--accent)]"
-                        : "bg-white/5 border-white/5 text-[var(--text-secondary)] hover:text-white"
+                        ? "bg-brand-accent/10 border-brand-accent/20 text-brand-accent"
+                        : "bg-white/5 border-white/5 text-brand-text-secondary hover:text-white"
                     }`}
                   >
                     <Star className="w-4 h-4 fill-current" />
                   </button>
                   <button
                     onClick={() => setSelectedAsset(null)}
-                    className="p-3 rounded-2xl bg-white/5 border border-white/5 text-[var(--text-secondary)] hover:text-white transition-all"
+                    className="p-3 rounded-2xl bg-white/5 border border-white/5 text-brand-text-secondary hover:text-white transition-all"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -391,10 +383,10 @@ const MainAppContent: React.FC = () => {
               </div>
 
               {/* Asset Chart panel */}
-              <div className="bg-[var(--bg-card)]/40 border border-white/5 rounded-3xl p-5 mb-6">
+              <div className="bg-brand-card/40 border border-white/5 rounded-3xl p-5 mb-6">
                 {loadingAsset ? (
                   <div className="h-44 flex items-center justify-center">
-                    <div className="w-6 h-6 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : (
                   assetQuote && (
@@ -411,35 +403,35 @@ const MainAppContent: React.FC = () => {
               {assetQuote && (
                 <div className="grid grid-cols-4 gap-2 mb-6 text-center">
                   <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--text-secondary)]">High</span>
+                    <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">High</span>
                     <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.high.toFixed(2)}</p>
                   </div>
                   <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--text-secondary)]">Low</span>
+                    <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">Low</span>
                     <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.low.toFixed(2)}</p>
                   </div>
                   <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--text-secondary)]">Open</span>
+                    <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">Open</span>
                     <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.open.toFixed(2)}</p>
                   </div>
                   <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--text-secondary)]">Close</span>
+                    <span className="text-[9px] font-mono uppercase tracking-wide text-brand-text-secondary">Close</span>
                     <p className="text-xs font-bold font-mono text-white mt-1">${assetQuote.prevClose.toFixed(2)}</p>
                   </div>
                 </div>
               )}
 
               {/* Set custom alert panel */}
-              <div className="bg-[var(--bg-card)]/20 border border-white/5 rounded-3xl p-5 mb-6">
-                <h3 className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase mb-4 flex items-center gap-1.5">
-                  <Bell className="w-4 h-4 text-[var(--accent)]" />
+              <div className="bg-brand-card/20 border border-white/5 rounded-3xl p-5 mb-6">
+                <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase mb-4 flex items-center gap-1.5">
+                  <Bell className="w-4 h-4 text-brand-accent" />
                   Add Target Threshold Alert
                 </h3>
                 
                 {alertSuccess ? (
-                  <div className="flex items-center gap-2 bg-[var(--chart-green)]/10 border border-[var(--chart-green)]/20 p-4 rounded-2xl text-xs text-white"
+                  <div className="flex items-center gap-2 bg-brand-chart-green/10 border border-brand-chart-green/20 p-4 rounded-2xl text-xs text-white"
                   >
-                    <CheckCircle className="w-5 h-5 text-[var(--chart-green)]" />
+                    <CheckCircle className="w-5 h-5 text-brand-chart-green" />
                     Target threshold alert compiled successfully!
                   </div>
                 ) : (
@@ -448,27 +440,27 @@ const MainAppContent: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setAlertCondition(alertCondition === "above" ? "below" : "above")}
-                      className="px-3.5 py-3 rounded-xl bg-[var(--bg-card)] text-[10px] font-bold uppercase border border-white/5 text-[var(--accent)] tracking-wider"
+                      className="px-3.5 py-3 rounded-xl bg-brand-card text-[10px] font-bold uppercase border border-white/5 text-brand-accent tracking-wider"
                     >
                       {alertCondition === "above" ? "Goes Above" : "Goes Below"}
                     </button>
                     
                     <div className="relative flex-1">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-mono text-[var(--text-secondary)]">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-mono text-brand-text-secondary">$</span>
                       <input
                         type="number"
                         step="0.01"
                         value={alertPrice}
                         onChange={(e) => setAlertPrice(e.target.value)}
                         placeholder="Target Price"
-                        className="w-full pl-7 pr-3 py-3 rounded-xl bg-[var(--bg-card)] border border-white/5 focus:border-[var(--accent)]/20 outline-none text-xs font-mono text-white"
+                        className="w-full pl-7 pr-3 py-3 rounded-xl bg-brand-card border border-white/5 focus:border-brand-accent/20 outline-none text-xs font-mono text-white"
                         required
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="py-3 px-4 rounded-xl bg-[var(--btn-accent)] hover:bg-[var(--accent)] text-[var(--bg-primary)] text-xs font-bold transition-all"
+                      className="py-3 px-4 rounded-xl bg-brand-btn-accent hover:bg-brand-accent text-brand-primary text-xs font-bold transition-all"
                     >
                       SET ALERT
                     </button>
@@ -478,9 +470,9 @@ const MainAppContent: React.FC = () => {
 
               {/* Analyst Ratings panel */}
               {recommendations && (
-                <div className="bg-[var(--bg-card)]/20 border border-white/5 rounded-3xl p-5 mb-6">
-                  <h3 className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase mb-4 flex items-center gap-1.5">
-                    <TrendingUp className="w-4 h-4 text-[var(--accent)]" />
+                <div className="bg-brand-card/20 border border-white/5 rounded-3xl p-5 mb-6">
+                  <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase mb-4 flex items-center gap-1.5">
+                    <TrendingUp className="w-4 h-4 text-brand-accent" />
                     Analyst Recommendations Consensus
                   </h3>
 
@@ -499,7 +491,7 @@ const MainAppContent: React.FC = () => {
                         {recommendations.sell > 0 && "Sell"}
                       </div>
                     </div>
-                    <div className="flex justify-between text-[10px] font-mono text-[var(--text-secondary)]">
+                    <div className="flex justify-between text-[10px] font-mono text-brand-text-secondary">
                       <span>Strong Buy: {recommendations.strongBuy}</span>
                       <span>Buy: {recommendations.buy}</span>
                       <span>Hold: {recommendations.hold}</span>
@@ -512,33 +504,33 @@ const MainAppContent: React.FC = () => {
               {/* Corporate Profiles descriptions */}
               {companyProfile && (
                 <div className="space-y-4">
-                  <h3 className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase border-b border-white/5 pb-2">
+                  <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase border-b border-white/5 pb-2">
                     Company Profile
                   </h3>
 
                   <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                      <Landmark className="w-4 h-4 text-[var(--accent)]" />
+                    <div className="flex items-center gap-2 text-brand-text-secondary">
+                      <Landmark className="w-4 h-4 text-brand-accent" />
                       <span>Industry: <strong className="text-white font-medium">{companyProfile.industry}</strong></span>
                     </div>
-                    <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                      <Building className="w-4 h-4 text-[var(--accent)]" />
+                    <div className="flex items-center gap-2 text-brand-text-secondary">
+                      <Building className="w-4 h-4 text-brand-accent" />
                       <span>CEO: <strong className="text-white font-medium">{companyProfile.ceo}</strong></span>
                     </div>
-                    <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                      <MapPin className="w-4 h-4 text-[var(--accent)]" />
+                    <div className="flex items-center gap-2 text-brand-text-secondary">
+                      <MapPin className="w-4 h-4 text-brand-accent" />
                       <span>Headquarters: <strong className="text-white font-medium">{companyProfile.headquarters}</strong></span>
                     </div>
-                    <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                      <Globe className="w-4 h-4 text-[var(--accent)]" />
-                      <a href={companyProfile.weburl} target="_blank" rel="noreferrer" className="text-white hover:text-[var(--accent)] flex items-center gap-1 font-medium hover:underline">
+                    <div className="flex items-center gap-2 text-brand-text-secondary">
+                      <Globe className="w-4 h-4 text-brand-accent" />
+                      <a href={companyProfile.weburl} target="_blank" rel="noreferrer" className="text-white hover:text-brand-accent flex items-center gap-1 font-medium hover:underline">
                         Visit Website
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
                   </div>
 
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed mt-4">
+                  <p className="text-xs text-brand-text-secondary leading-relaxed mt-4">
                     {companyProfile.name} is a global leader in {companyProfile.industry.toLowerCase()} technologies. Headquartered in {companyProfile.headquarters}, it is monitored closely by equity research networks for high-volume allocation trends.
                   </p>
                 </div>
@@ -556,19 +548,19 @@ const MainAppContent: React.FC = () => {
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             />
 
-            <div className="relative w-full max-w-xl mx-auto bg-[var(--bg-secondary)] border-t border-white/10 rounded-t-[32px] p-6 max-h-[85vh] overflow-y-auto z-10 shadow-2xl pb-16"
+            <div className="relative w-full max-w-xl mx-auto bg-brand-secondary border-t border-white/10 rounded-t-[32px] p-6 max-h-[85vh] overflow-y-auto z-10 shadow-2xl pb-16"
               id="news-sheet"
             >
               <div className="w-12 h-1 bg-white/10 rounded-full mx-auto mb-6" />
 
               {/* Close Button Header */}
               <div className="flex justify-between items-center mb-4">
-                <span className="bg-[var(--accent)] text-[var(--bg-primary)] text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-1 rounded">
+                <span className="bg-brand-accent text-brand-primary text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-1 rounded">
                   {selectedNews.category}
                 </span>
                 <button
                   onClick={() => setSelectedNews(null)}
-                  className="p-3 rounded-2xl bg-white/5 border border-white/5 text-[var(--text-secondary)]"
+                  className="p-3 rounded-2xl bg-white/5 border border-white/5 text-brand-text-secondary"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -582,15 +574,15 @@ const MainAppContent: React.FC = () => {
               {/* Headings */}
               <h1 className="text-lg font-bold text-white mb-2 leading-snug">{selectedNews.headline}</h1>
               
-              <div className="flex items-center gap-3 text-[10px] text-[var(--text-secondary)] font-mono mb-6 pb-4 border-b border-white/5">
+              <div className="flex items-center gap-3 text-[10px] text-brand-text-secondary font-mono mb-6 pb-4 border-b border-white/5">
                 <span>{selectedNews.source}</span>
                 <span>•</span>
                 <span>{selectedNews.readTime || "3m read"}</span>
               </div>
 
               {/* Gemini AI Summary Segment */}
-              <div className="bg-[var(--bg-card)] border border-[var(--accent)]/20 rounded-3xl p-5 mb-6 relative overflow-hidden">
-                <h3 className="text-xs font-mono font-bold text-[var(--accent)] uppercase mb-3 flex items-center gap-1.5">
+              <div className="bg-brand-card border border-brand-accent/20 rounded-3xl p-5 mb-6 relative overflow-hidden">
+                <h3 className="text-xs font-mono font-bold text-brand-accent uppercase mb-3 flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 animate-pulse" />
                   FinScope AI Intelligence briefing
                 </h3>
@@ -602,7 +594,7 @@ const MainAppContent: React.FC = () => {
                     <div className="h-3 w-3/4 bg-white/5 rounded animate-pulse" />
                   </div>
                 ) : (
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                  <p className="text-xs text-brand-text-secondary leading-relaxed">
                     {aiNewsSummary}
                   </p>
                 )}
@@ -610,10 +602,10 @@ const MainAppContent: React.FC = () => {
 
               {/* Original Summary text details */}
               <div className="space-y-4">
-                <h3 className="text-xs font-mono tracking-widest text-[var(--text-secondary)] uppercase">
+                <h3 className="text-xs font-mono tracking-widest text-brand-text-secondary uppercase">
                   Original Press Release Summary
                 </h3>
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                <p className="text-xs text-brand-text-secondary leading-relaxed">
                   {selectedNews.summary || "Full details of this market announcement are being synchronized. Please monitor active regulatory filings."}
                 </p>
               </div>

@@ -96,14 +96,14 @@ export const AssetChart: React.FC<AssetChartProps> = ({ data, color = "var(--cha
       {/* Dynamic Hover Details Panel */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--text-secondary)]">
+          <span className="text-[10px] uppercase font-mono tracking-wider text-brand-text-secondary">
             {hoverIndex !== null ? "TRACKING PRICE" : "CURRENT VALUE"}
           </span>
           <div className="flex items-baseline gap-2">
             <h3 className="text-2xl font-bold font-mono tracking-tight text-white">
               ${(hoverIndex !== null ? svgPoints[hoverIndex].value : points[points.length - 1]).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </h3>
-            <span className={`text-xs font-bold font-mono ${isPositive ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
+            <span className={`text-xs font-bold font-mono ${isPositive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
               {isPositive ? "+" : ""}{(((points[points.length - 1] - points[0]) / points[0]) * 100).toFixed(2)}%
             </span>
           </div>
@@ -117,8 +117,8 @@ export const AssetChart: React.FC<AssetChartProps> = ({ data, color = "var(--cha
               onClick={() => { setActiveTab(tab); setHoverIndex(null); }}
               className={`px-2.5 py-1 rounded-lg text-[10px] font-bold tracking-wider transition-all duration-300 ${
                 activeTab === tab
-                  ? "bg-[var(--btn-accent)] text-[var(--bg-primary)] shadow-sm"
-                  : "text-[var(--text-secondary)] hover:text-white"
+                  ? "bg-brand-btn-accent text-brand-primary shadow-sm"
+                  : "text-brand-text-secondary hover:text-white"
               }`}
             >
               {tab}

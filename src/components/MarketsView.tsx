@@ -66,10 +66,10 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
       {/* Search Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <span className="text-[10px] font-mono tracking-widest text-[var(--text-secondary)] uppercase font-semibold block mb-0.5">MARKETS HUB</span>
+          <span className="text-[10px] font-mono tracking-widest text-brand-text-secondary uppercase font-semibold block mb-0.5">MARKETS HUB</span>
           <h1 className="font-display text-2xl font-black text-white tracking-tight">Assets Explorer</h1>
         </div>
-        <button onClick={loadMarketData} className="p-3.5 rounded-[18px] bg-[var(--bg-card)] border border-white/10 text-[var(--text-secondary)] hover:text-white hover:border-[var(--accent)]/50 transition-all shadow-lg">
+        <button onClick={loadMarketData} className="p-3.5 rounded-[18px] bg-brand-card border border-white/10 text-brand-text-secondary hover:text-white hover:border-brand-accent/50 transition-all shadow-lg">
           <RefreshCw className="w-4 h-4" />
         </button>
       </div>
@@ -87,8 +87,8 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
             onClick={() => { setActiveTab(tab.id as any); setQuery(""); }}
             className={`px-4.5 py-3 rounded-[14px] text-xs font-black tracking-widest uppercase whitespace-nowrap transition-all ${
               activeTab === tab.id
-                ? "bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg shadow-[var(--accent)]/10"
-                : "bg-[var(--bg-card)]/70 border border-white/10 text-[var(--text-secondary)] hover:text-white hover:border-white/20"
+                ? "bg-brand-accent text-brand-primary shadow-lg shadow-brand-accent/10"
+                : "bg-brand-card/70 border border-white/10 text-brand-text-secondary hover:text-white hover:border-white/20"
             }`}
           >
             {tab.label}
@@ -99,13 +99,13 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
       {/* Secondary Search Ticker Input */}
       {activeTab !== "watchlist" && (
         <div className="relative mb-6">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-secondary)]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-text-secondary" />
           <input
             type="text"
             placeholder={`Filter ${activeTab}...`}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3.5 rounded-[18px] bg-[var(--bg-card)]/80 border border-white/10 focus:border-[var(--accent)]/50 focus:bg-[var(--bg-card)] outline-none text-white text-xs transition-all shadow-md placeholder-[var(--text-secondary)]/60"
+            className="w-full pl-11 pr-4 py-3.5 rounded-[18px] bg-brand-card/80 border border-white/10 focus:border-brand-accent/50 focus:bg-brand-card outline-none text-white text-xs transition-all shadow-md placeholder-brand-text-secondary/60"
           />
         </div>
       )}
@@ -132,13 +132,13 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                   <div
                     key={st.symbol}
                     onClick={() => onSelectAsset(st.symbol, "stock")}
-                    className="flex items-center justify-between p-4 rounded-[20px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
+                    className="flex items-center justify-between p-4 rounded-[20px] bg-gradient-to-r from-brand-card/80 to-brand-secondary/80 border border-white/10 hover:border-brand-accent/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
                       <button
                         onClick={(e) => handleToggleWatchlist(e, st.symbol, st.symbol + " Inc.", "stock")}
                         className={`p-2.5 rounded-[12px] border transition-all ${
-                          isWatch ? "bg-[var(--accent)]/15 border-[var(--accent)]/30 text-[var(--accent)]" : "bg-[var(--bg-card)] border-white/10 text-[var(--text-secondary)]"
+                          isWatch ? "bg-brand-accent/15 border-brand-accent/30 text-brand-accent" : "bg-brand-card border-white/10 text-brand-text-secondary"
                         }`}
                       >
                         <Star className="w-3.5 h-3.5 fill-current" />
@@ -147,7 +147,7 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                         <span className="text-xs font-black font-mono text-white">
                           {st.symbol}
                         </span>
-                        <p className="text-[10px] text-[var(--text-secondary)] mt-1 font-semibold uppercase tracking-wider">Stock Quote</p>
+                        <p className="text-[10px] text-brand-text-secondary mt-1 font-semibold uppercase tracking-wider">Stock Quote</p>
                       </div>
                     </div>
 
@@ -165,7 +165,7 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
 
                     <div className="text-right">
                       <p className="text-xs font-black font-mono text-white">${st.price.toFixed(2)}</p>
-                      <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
+                      <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
                         {positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                         {positive ? "+" : ""}{st.changePercent}%
                       </span>
@@ -184,13 +184,13 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                   <div
                     key={cr.symbol}
                     onClick={() => onSelectAsset(cr.symbol, "crypto")}
-                    className="flex items-center justify-between p-4 rounded-[20px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
+                    className="flex items-center justify-between p-4 rounded-[20px] bg-gradient-to-r from-brand-card/80 to-brand-secondary/80 border border-white/10 hover:border-brand-accent/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
                       <button
                         onClick={(e) => handleToggleWatchlist(e, cr.symbol, cr.name, "crypto")}
                         className={`p-2.5 rounded-[12px] border transition-all ${
-                          isWatch ? "bg-[var(--accent)]/15 border-[var(--accent)]/30 text-[var(--accent)]" : "bg-[var(--bg-card)] border-white/10 text-[var(--text-secondary)]"
+                          isWatch ? "bg-brand-accent/15 border-brand-accent/30 text-brand-accent" : "bg-brand-card border-white/10 text-brand-text-secondary"
                         }`}
                       >
                         <Star className="w-3.5 h-3.5 fill-current" />
@@ -199,13 +199,13 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                         <span className="text-xs font-black font-mono text-white">
                           {cr.symbol}
                         </span>
-                        <p className="text-[10px] text-[var(--text-secondary)] mt-1 font-semibold uppercase tracking-wider">{cr.name}</p>
+                        <p className="text-[10px] text-brand-text-secondary mt-1 font-semibold uppercase tracking-wider">{cr.name}</p>
                       </div>
                     </div>
 
                     <div className="text-right">
                       <p className="text-xs font-black font-mono text-white">${cr.price.toLocaleString()}</p>
-                      <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
+                      <span className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
                         {positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                         {positive ? "+" : ""}{cr.changePercent}%
                       </span>
@@ -224,20 +224,20 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                   <div
                     key={et.symbol}
                     onClick={() => onSelectAsset(et.symbol, "etf")}
-                    className="p-4 rounded-[20px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
+                    className="p-4 rounded-[20px] bg-gradient-to-r from-brand-card/80 to-brand-secondary/80 border border-white/10 hover:border-brand-accent/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <button
                           onClick={(e) => handleToggleWatchlist(e, et.symbol, et.name, "etf")}
                           className={`p-2.5 rounded-[12px] border transition-all ${
-                            isWatch ? "bg-[var(--accent)]/15 border-[var(--accent)]/30 text-[var(--accent)]" : "bg-[var(--bg-card)] border-white/10 text-[var(--text-secondary)]"
+                            isWatch ? "bg-brand-accent/15 border-brand-accent/30 text-brand-accent" : "bg-brand-card border-white/10 text-brand-text-secondary"
                           }`}
                         >
                           <Star className="w-3.5 h-3.5 fill-current" />
                         </button>
                         <div>
-                          <span className="text-xs font-black font-mono bg-[var(--accent)]/15 border border-[var(--accent)]/25 text-[var(--accent)] px-2.5 py-1 rounded-[8px]">
+                          <span className="text-xs font-black font-mono bg-brand-accent/15 border border-brand-accent/25 text-brand-accent px-2.5 py-1 rounded-[8px]">
                             {et.symbol}
                           </span>
                           <span className="text-xs text-white font-black ml-2">{et.name}</span>
@@ -245,22 +245,22 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                       </div>
                       <div className="text-right">
                         <p className="text-xs font-black font-mono text-white">${et.price.toFixed(2)}</p>
-                        <p className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
+                        <p className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
                           {positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                           {positive ? "+" : ""}{et.changePercent}%
                         </p>
                       </div>
                     </div>
                     {/* ETF Details details badge row */}
-                    <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-[9px] font-mono text-[var(--text-secondary)] font-bold">
-                      <span className="flex items-center gap-1.5 bg-[var(--bg-primary)]/60 px-2 py-1 rounded-[6px] border border-white/5">
-                        <Award className="w-3.5 h-3.5 text-[var(--accent)]" />
+                    <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-[9px] font-mono text-brand-text-secondary font-bold">
+                      <span className="flex items-center gap-1.5 bg-brand-primary/60 px-2 py-1 rounded-[6px] border border-white/5">
+                        <Award className="w-3.5 h-3.5 text-brand-accent" />
                         Risk: {et.risk}
                       </span>
                       <span>•</span>
-                      <span className="bg-[var(--bg-primary)]/60 px-2 py-1 rounded-[6px] border border-white/5">Ratio: {et.expenseRatio}%</span>
+                      <span className="bg-brand-primary/60 px-2 py-1 rounded-[6px] border border-white/5">Ratio: {et.expenseRatio}%</span>
                       <span>•</span>
-                      <span className="text-[var(--chart-green)] bg-[var(--chart-green)]/10 px-2 py-1 rounded-[6px] border border-[var(--chart-green)]/20">1Y: {et.performance1Y}%</span>
+                      <span className="text-brand-chart-green bg-brand-chart-green/10 px-2 py-1 rounded-[6px] border border-brand-chart-green/20">1Y: {et.performance1Y}%</span>
                     </div>
                   </div>
                 );
@@ -282,7 +282,7 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                     <div
                       key={item.id}
                       onClick={() => onSelectAsset(item.symbol, item.type)}
-                      className="flex items-center justify-between p-4 rounded-[20px] bg-gradient-to-r from-[var(--bg-card)]/80 to-[var(--bg-secondary)]/80 border border-white/10 hover:border-[var(--accent)]/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer relative overflow-hidden"
+                      className="flex items-center justify-between p-4 rounded-[20px] bg-gradient-to-r from-brand-card/80 to-brand-secondary/80 border border-white/10 hover:border-brand-accent/40 shadow-lg hover:translate-x-1 transition-all cursor-pointer relative overflow-hidden"
                     >
                       {/* Swipe / Delete styling details */}
                       <div className="flex items-center gap-3">
@@ -296,13 +296,13 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                           <span className="text-xs font-black font-mono text-white">
                             {item.symbol}
                           </span>
-                          <p className="text-[10px] text-[var(--text-secondary)] mt-1 font-bold uppercase tracking-wider">{item.name}</p>
+                          <p className="text-[10px] text-brand-text-secondary mt-1 font-bold uppercase tracking-wider">{item.name}</p>
                         </div>
                       </div>
 
                       <div className="text-right">
                         <p className="text-xs font-black font-mono text-white">${priceVal.toLocaleString()}</p>
-                        <p className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-[var(--chart-green)]" : "text-[var(--chart-red)]"}`}>
+                        <p className={`text-[10px] font-mono font-bold flex items-center justify-end gap-0.5 ${positive ? "text-brand-chart-green" : "text-brand-chart-red"}`}>
                           {positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                           {positive ? "+" : ""}{changePct.toFixed(2)}%
                         </p>
@@ -311,10 +311,10 @@ export const MarketsView: React.FC<MarketsViewProps> = ({ onSelectAsset }) => {
                   );
                 })
               ) : (
-                <div className="text-center py-12 bg-gradient-to-br from-[var(--bg-card)]/40 to-[var(--bg-secondary)]/40 rounded-[24px] border border-dashed border-white/15 p-6 shadow-md">
-                  <Star className="w-8 h-8 text-[var(--accent)]/60 mx-auto mb-3" />
+                <div className="text-center py-12 bg-gradient-to-br from-brand-card/40 to-brand-secondary/40 rounded-[24px] border border-dashed border-white/15 p-6 shadow-md">
+                  <Star className="w-8 h-8 text-brand-accent/60 mx-auto mb-3" />
                   <p className="text-sm text-white font-bold">Your Watchlist is empty</p>
-                  <p className="text-xs text-[var(--text-secondary)] mt-1 max-w-xs mx-auto leading-relaxed">
+                  <p className="text-xs text-brand-text-secondary mt-1 max-w-xs mx-auto leading-relaxed">
                     Explore lists and click the star buttons to pin assets directly to your home snapshot.
                   </p>
                 </div>

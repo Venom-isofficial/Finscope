@@ -47,20 +47,20 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onChangeTab, un
 
               <Icon
                 className={`w-5 h-5 mb-1 transition-all duration-300 relative z-10 ${
-                  isActive ? "text-[var(--accent)] scale-110" : "text-[var(--text-secondary)] hover:text-white"
+                  isActive ? "text-brand-accent scale-110" : "text-brand-text-secondary hover:text-white"
                 }`}
               />
               
               <span
                 className={`text-[9px] font-medium tracking-wide transition-colors duration-300 relative z-10 ${
-                  isActive ? "text-white" : "text-[var(--text-secondary)]"
+                  isActive ? "text-white" : "text-brand-text-secondary"
                 }`}
               >
                 {tab.label}
               </span>
               
               {isActive && (
-                <div className="absolute bottom-1 w-1 h-1 rounded-full bg-[var(--accent)]" />
+                <div className="absolute bottom-1 w-1 h-1 rounded-full bg-brand-accent" />
               )}
             </button>
           );
