@@ -154,12 +154,12 @@ const MainAppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden relative selection:bg-[var(--accent)] selection:text-[var(--bg-primary)] transition-colors duration-500">
-      {/* Global Animated Watery Background Layer - GPU Optimized with lighter blur for lag-free performance */}
+      {/* Global Animated Watery Background Layer */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[55%] h-[55%] rounded-full bg-[var(--accent)] opacity-[0.07] blur-[80px] transform-gpu watery-blob-1" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[65%] h-[65%] rounded-full bg-[var(--accent)] opacity-[0.06] blur-[90px] transform-gpu watery-blob-2" />
-        <div className="absolute top-[30%] right-[15%] w-[45%] h-[45%] rounded-full bg-[var(--bg-card)] opacity-[0.15] blur-[80px] transform-gpu watery-blob-3" />
-        <div className="absolute bottom-[20%] left-[10%] w-[50%] h-[50%] rounded-full bg-[var(--bg-secondary)] opacity-[0.14] blur-[85px] transform-gpu watery-blob-4" />
+        <div className="absolute top-[-10%] left-[-10%] w-[55%] h-[55%] rounded-full bg-[var(--accent)] opacity-[0.06] blur-[120px] watery-blob-1" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[65%] h-[65%] rounded-full bg-[var(--accent)] opacity-[0.05] blur-[140px] watery-blob-2" />
+        <div className="absolute top-[30%] right-[15%] w-[45%] h-[45%] rounded-full bg-[var(--bg-card)] opacity-[0.14] blur-[100px] watery-blob-3" />
+        <div className="absolute bottom-[20%] left-[10%] w-[50%] h-[50%] rounded-full bg-[var(--bg-secondary)] opacity-[0.12] blur-[110px] watery-blob-4" />
       </div>
 
       <AnimatePresence mode="wait">
